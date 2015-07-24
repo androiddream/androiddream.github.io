@@ -65,6 +65,409 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-android解析dataset" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/20/android解析dataset/" class="article-date">
+  <time datetime="2015-04-20T15:52:03.000Z" itemprop="datePublished">4月 20 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/20/android解析dataset/">android解析dataset</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="直接贴代码了">直接贴代码了</h2><p>package com.example.blank.cuhui;</p>
+<p>import android.content.Context;<br>import android.os.Bundle;<br>import android.os.Handler;<br>import android.os.Message;<br>import android.support.v4.app.Fragment;<br>import android.support.v7.widget.SearchView;<br>import android.view.LayoutInflater;<br>import android.view.Menu;<br>import android.view.MenuInflater;<br>import android.view.MenuItem;<br>import android.view.View;<br>import android.view.ViewGroup;<br>import android.widget.EditText;<br>import android.widget.ExpandableListView;<br>import android.widget.ProgressBar;<br>import android.widget.TextView;<br>import android.widget.Toast;</p>
+<p>import org.ksoap2.SoapEnvelope;<br>import org.ksoap2.serialization.MarshalBase64;<br>import org.ksoap2.serialization.SoapObject;<br>import org.ksoap2.serialization.SoapSerializationEnvelope;<br>import org.ksoap2.transport.HttpTransportSE;<br>import org.xmlpull.v1.XmlPullParserException;</p>
+<p>import java.io.IOException;<br>import java.util.ArrayList;<br>import java.util.List;</p>
+<p>import model.CarManage;<br>import widgets.AnimatedExpandableListView;</p>
+<p>public class FragmentCollect extends Fragment {<br>    private AnimatedExpandableListView listView;<br>    private ExampleAdapter adapter;<br>    private List<carmanage> list;<br>    private ProgressBar pbar;<br>    String nameSpace = “<a href="http://tempuri.org/" target="_blank" rel="external">http://tempuri.org/</a>“;<br>    // 调用方法的名称<br>    String methodName = “SelectCarInfoList”;<br>    // EndPoint<br>    String serviceURL = “<a href="http://www.yncuhui.com/RentCarSTD/webserver/RentCarServer.asmx" target="_blank" rel="external">http://www.yncuhui.com/RentCarSTD/webserver/RentCarServer.asmx</a>“;<br>    // SOAP Action<br>    String soapAction = “<a href="http://tempuri.org/SelectCarInfoList" target="_blank" rel="external">http://tempuri.org/SelectCarInfoList</a>“;<br>    private SoapObject result;<br>    private boolean mSearchCheck;<br>    private static final String TEXT_FRAGMENT = “TEXT_FRAGMENT”;</carmanage></p>
+<pre><code>public FragmentCollect newInstance<span class="params">(String text)</span>{
+    FragmentCollect mFragment = new FragmentCollect<span class="params">()</span>;
+    Bundle mBundle = new Bundle<span class="params">()</span>;
+    mBundle.putString<span class="params">(TEXT_FRAGMENT, text)</span>;
+    mFragment.setArguments<span class="params">(mBundle)</span>;
+    return mFragment;
+}
+
+@Override
+public View onCreateView<span class="params">(LayoutInflater inflater, ViewGroup container,
+        Bundle savedInstanceState)</span> {
+    <span class="comment">// <span class="doctag">TODO</span> Auto-generated metho</span>
+
+
+    List&lt;GroupItem&gt; items = new ArrayList&lt;GroupItem&gt;<span class="params">()</span>;
+    <span class="comment">//List&lt;Blackinfo&gt; list=new ArrayList&lt;Blackinfo&gt;();</span>
+    RequesetAndParse<span class="params">()</span>;
+    View rootView = inflater.inflate<span class="params">(R.layout.fragment_collect, container, <span class="literal">false</span>)</span>;
+    pbar= <span class="params">(ProgressBar)</span> rootView.findViewById<span class="params">(R.id.progressBar)</span>;
+    listView= <span class="params">(AnimatedExpandableListView)</span> rootView.findViewById<span class="params">(R.id.listView)</span>;
+   <span class="comment">// TextView mTxtTitle = (TextView) rootView.findViewById(R.id.txtTitle);</span>
+    <span class="comment">//mTxtTitle.setText(getArguments().getString(TEXT_FRAGMENT));</span>
+
+
+
+
+    <span class="comment">// listView.setAdapter(adapter);</span>
+
+    <span class="comment">// In order to show animations, we need to use a custom click handler</span>
+    <span class="comment">// for our ExpandableListView.</span>
+    listView.setOnGroupClickListener<span class="params">(new ExpandableListView.OnGroupClickListener<span class="params">()</span> {
+
+        @Override
+        public boolean onGroupClick<span class="params">(ExpandableListView parent, View v, int groupPosition, long id)</span> {
+            // We call collapseGroupWithAnimation<span class="params">(int)</span> and
+            // expandGroupWithAnimation<span class="params">(int)</span> to animate group
+            // expansion/collapse.
+            if <span class="params">(listView.isGroupExpanded<span class="params">(groupPosition)</span>)</span> {
+                listView.collapseGroupWithAnimation<span class="params">(groupPosition)</span>;
+            } else {
+                listView.expandGroupWithAnimation<span class="params">(groupPosition)</span>;
+            }
+            return <span class="literal">true</span>;
+        }
+
+    })</span>;
+    return rootView;
+}
+public Handler handler = new Handler<span class="params">()</span>{
+    public void handleMessage<span class="params">(android.os.Message msg)</span> {
+        <span class="comment">// 将WebService得到的结果返回给TextView</span>
+        List&lt;GroupItem&gt; items = new ArrayList&lt;GroupItem&gt;<span class="params">()</span>;
+        <span class="comment">//ArrayList&lt;Blackinfo&gt; list1= (ArrayList&lt;Blackinfo&gt;) msg.obj;</span>
+        ArrayList&lt;CarManage&gt;  list= <span class="params">(ArrayList&lt;CarManage&gt;)</span> msg.obj;
+        <span class="keyword">for</span><span class="params">(int i = <span class="number">0</span>; i &lt; list.size<span class="params">()</span>; i++)</span> {
+            GroupItem item = new GroupItem<span class="params">()</span>;
+            <span class="comment">//Blackinfo blackinfo=new Blackinfo();</span>
+
+            item.title = list.get<span class="params">(i)</span>.getCarbrand<span class="params">()</span>
+                    .toString<span class="params">()</span>;
+
+
+            ChildItem child = new ChildItem<span class="params">()</span>;
+            <span class="comment">//child.title = "证件类型：" +list.get(i).getIdtype().toString();</span>
+
+            <span class="comment">// child.hint = "证件号："+list.get(i).getIdnum().toString();</span>
+
+
+            item.items.add<span class="params">(child)</span>;
+
+
+            items.add<span class="params">(item)</span>;
+        }
+
+        adapter = new ExampleAdapter<span class="params">(getActivity<span class="params">()</span>)</span>;
+
+        adapter.setData<span class="params">(items)</span>;
+        listView.setAdapter<span class="params">(adapter)</span>;
+        pbar.setVisibility<span class="params">(View.INVISIBLE)</span>;
+
+    };
+};
+private void RequesetAndParse<span class="params">()</span> {
+    new Thread<span class="params">(new Runnable<span class="params">()</span> {
+        @Override
+        public void run<span class="params">()</span> {
+            CarManage carmanage = new CarManage<span class="params">()</span>;
+            String str = <span class="string">""</span>;
+            SoapObject soapObject = new SoapObject<span class="params">(nameSpace, methodName)</span>;
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope<span class="params">(SoapEnvelope.VER12)</span>;
+            envelope.bodyOut = soapObject;
+            new MarshalBase64<span class="params">()</span>.register<span class="params">(envelope)</span>;
+            envelope.setOutputSoapObject<span class="params">(soapObject)</span>;
+
+            // SoapObject soapChild= <span class="params">(SoapObject)</span> soapObject.getProperty<span class="params">(<span class="number">1</span>)</span>;
+            HttpTransportSE transport = new HttpTransportSE<span class="params">(serviceURL)</span>;
+            transport.debug = <span class="literal">true</span>;
+            try {
+
+                transport.call<span class="params">(nameSpace + methodName, envelope)</span>;
+                SoapObject result = <span class="params">(SoapObject)</span> envelope.getResponse<span class="params">()</span>;
+                //下面对结果进行解析，结构类似json对象
+                //str= result.getProperty<span class="params">(<span class="number">6</span>)</span>.toString<span class="params">()</span>;
+
+                list = parseCarmanage<span class="params">(result)</span>;
+
+                Message msg=handler.obtainMessage<span class="params">()</span>;
+                msg.obj=list;
+                handler.sendMessage<span class="params">(msg)</span>;
+
+
+
+
+
+            } catch <span class="params">(IOException e)</span> {
+                // TODO Auto-generated catch block
+                e.printStackTrace<span class="params">()</span>;
+            } catch <span class="params">(XmlPullParserException e)</span> {
+                // TODO Auto-generated catch block
+                e.printStackTrace<span class="params">()</span>;
+            }
+        }
+    })</span>.start<span class="params">()</span>;
+
+
+}
+
+public List&lt;CarManage&gt; parseCarmanage<span class="params">(SoapObject result)</span>
+{
+    list=new ArrayList&lt;CarManage&gt;<span class="params">()</span>;
+    CarManage carmanage=null;
+    SoapObject soapChild= <span class="params">(SoapObject)</span> result.getProperty<span class="params">(<span class="number">1</span>)</span>;
+    SoapObject soapFuckingchild= <span class="params">(SoapObject)</span> soapChild.getProperty<span class="params">(<span class="number">0</span>)</span>;
+    SoapObject soaplittleObject= <span class="params">(SoapObject)</span> soapFuckingchild.getProperty<span class="params">(<span class="number">0</span>)</span>;
+    <span class="keyword">for</span> <span class="params">(int j=<span class="number">0</span>;j&lt;soapFuckingchild.getPropertyCount<span class="params">()</span>;j++)</span>
+    {
+        SoapObject soapRootchild= <span class="params">(SoapObject)</span> soapFuckingchild.getProperty<span class="params">(j)</span>;
+        carmanage=new CarManage<span class="params">()</span>;
+
+        carmanage.setCarnum<span class="params">(soapRootchild.getProperty<span class="params">(<span class="number">1</span>)</span>.toString<span class="params">()</span>)</span>;
+        carmanage.setCarbrand<span class="params">(soapRootchild.getProperty<span class="params">(<span class="number">2</span>)</span>.toString<span class="params">()</span>)</span>;
+        carmanage.setCartype<span class="params">(soapRootchild.getProperty<span class="params">(<span class="number">3</span>)</span>.toString<span class="params">()</span>)</span>;
+        carmanage.setCarcolor<span class="params">(soapRootchild.getProperty<span class="params">(<span class="number">4</span>)</span>.toString<span class="params">()</span>)</span>;
+        carmanage.setCarstate<span class="params">(soapRootchild.getProperty<span class="params">(<span class="number">5</span>)</span>.toString<span class="params">()</span>)</span>;
+        carmanage.setCarrent<span class="params">( soapRootchild.getProperty<span class="params">(<span class="number">6</span>)</span>.toString<span class="params">()</span>)</span>;
+        carmanage.setCarmargin<span class="params">(soapRootchild.getProperty<span class="params">(<span class="number">7</span>)</span>.toString<span class="params">()</span>)</span>;
+        carmanage.setMotonum<span class="params">(soapRootchild.getProperty<span class="params">(<span class="number">8</span>)</span>.toString<span class="params">()</span>)</span>;
+        carmanage.setVim<span class="params">(soapRootchild.getProperty<span class="params">(<span class="number">9</span>)</span>.toString<span class="params">()</span>)</span>;
+        list.add<span class="params">(carmanage)</span>;
+
+    }
+    <span class="comment">/*for (int i=0;i&lt;soaplittleObject.getPropertyCount();i++)
+    {
+        blackinfo=new Blackinfo();
+        blackinfo.setId(soaplittleObject.getProperty(0).toString());
+        blackinfo.setName(soaplittleObject.getProperty(1).toString());
+        blackinfo.setSex(soaplittleObject.getProperty(2).toString());
+        blackinfo.setIdtype(soaplittleObject.getProperty(3).toString());
+        blackinfo.setIdnum(soaplittleObject.getProperty(4).toString());
+        blackinfo.setDate( soaplittleObject.getProperty(5).toString());
+        blackinfo.setCompany(soaplittleObject.getProperty(6).toString());
+        blackinfo.setReason(soaplittleObject.getProperty(7).toString());
+        blackinfo.setEtc(soaplittleObject.getProperty(8).toString());
+        list.add(blackinfo);
+        //list.add(1,blackinfo);
+
+
+
+
+
+
+    }*/</span>
+
+    return list;
+}
+
+private static class GroupItem {
+    String title;
+    List&lt;ChildItem&gt; items = new ArrayList&lt;ChildItem&gt;<span class="params">()</span>;
+}
+
+private static class ChildItem {
+    String title;
+    String hint;
+}
+
+private static class ChildHolder {
+    TextView title;
+    TextView hint;
+    TextView textsex;
+    TextView textdate;
+    TextView textcompany;
+    TextView textreason;
+    TextView textetc;
+}
+
+private static class GroupHolder {
+    TextView title;
+}
+
+<span class="comment">/**
+ * Adapter for our list of {@link GroupItem}s.
+ */</span>
+private class ExampleAdapter extends AnimatedExpandableListView.AnimatedExpandableListAdapter {
+    private LayoutInflater inflater;
+
+    private List&lt;GroupItem&gt; items;
+
+    public ExampleAdapter<span class="params">(Context context)</span> {
+        inflater = LayoutInflater.from<span class="params">(context)</span>;
+    }
+
+    public void setData<span class="params">(List&lt;GroupItem&gt; items)</span> {
+        this.items = items;
+    }
+
+    @Override
+    public ChildItem getChild<span class="params">(int groupPosition, int childPosition)</span> {
+        return items.get<span class="params">(groupPosition)</span>.items.get<span class="params">(childPosition)</span>;
+    }
+
+    @Override
+    public long getChildId<span class="params">(int groupPosition, int childPosition)</span> {
+        return childPosition;
+    }
+
+    @Override
+    public View getRealChildView<span class="params">(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent)</span> {
+        ChildHolder holder;
+        ChildItem item = getChild<span class="params">(groupPosition, childPosition)</span>;
+        <span class="keyword">if</span> <span class="params">(convertView == null)</span> {
+            holder = new ChildHolder<span class="params">()</span>;
+            convertView = inflater.inflate<span class="params">(R.layout.list_item, parent, <span class="literal">false</span>)</span>;
+            holder.textsex = <span class="params">(TextView)</span> convertView.findViewById<span class="params">(R.id.textsex)</span>;
+            holder.title = <span class="params">(TextView)</span> convertView.findViewById<span class="params">(R.id.textTitle)</span>;
+            holder.hint = <span class="params">(TextView)</span> convertView.findViewById<span class="params">(R.id.textHint)</span>;
+            holder.textdate = <span class="params">(TextView)</span> convertView.findViewById<span class="params">(R.id.textdate)</span>;
+            holder.textcompany = <span class="params">(TextView)</span> convertView.findViewById<span class="params">(R.id.textcompany)</span>;
+            holder.textreason = <span class="params">(TextView)</span> convertView.findViewById<span class="params">(R.id.textreason)</span>;
+            holder.textetc = <span class="params">(TextView)</span> convertView.findViewById<span class="params">(R.id.textetc)</span>;
+            convertView.setTag<span class="params">(holder)</span>;
+        } <span class="keyword">else</span> {
+            holder = <span class="params">(ChildHolder)</span> convertView.getTag<span class="params">()</span>;
+        }
+        holder.textsex.setText<span class="params">(<span class="string">"车型:"</span>+list.get<span class="params">(groupPosition)</span>.getCartype<span class="params">()</span>.toString<span class="params">()</span>)</span>;
+        holder.title.setText<span class="params">( <span class="string">"品牌:"</span>+list.get<span class="params">(groupPosition)</span>.getCarbrand<span class="params">()</span>.toString<span class="params">()</span>)</span>;
+        <span class="comment">//holder.title.setText(item.title);</span>
+        holder.hint.setText<span class="params">(<span class="string">"车牌号:"</span> +list.get<span class="params">(groupPosition)</span>.getCarnum<span class="params">()</span>.toString<span class="params">()</span>)</span>;
+        holder.textdate.setText<span class="params">(<span class="string">"车颜色:"</span>+ list.get<span class="params">(groupPosition)</span>.getCarcolor<span class="params">()</span>.toString<span class="params">()</span>)</span>;
+        holder.textcompany.setText<span class="params">(<span class="string">"此车状态:"</span>+ list.get<span class="params">(groupPosition)</span>.getCarstate<span class="params">()</span>.toString<span class="params">()</span>)</span>;
+        holder.textreason.setText<span class="params">(<span class="string">"租金:"</span>+ list.get<span class="params">(groupPosition)</span>.getCarrent<span class="params">()</span>.toString<span class="params">()</span>)</span>;
+        holder.textetc.setText<span class="params">(<span class="string">"押金:"</span>+ list.get<span class="params">(groupPosition)</span>.getCarmargin<span class="params">()</span>.toString<span class="params">()</span>)</span>;
+        return convertView;
+    }
+
+    @Override
+    public int getRealChildrenCount<span class="params">(int groupPosition)</span> {
+        return items.get<span class="params">(groupPosition)</span>.items.size<span class="params">()</span>;
+    }
+
+    @Override
+    public GroupItem getGroup<span class="params">(int groupPosition)</span> {
+        return items.get<span class="params">(groupPosition)</span>;
+    }
+
+    @Override
+    public int getGroupCount<span class="params">()</span> {
+        return items.size<span class="params">()</span>;
+    }
+
+    @Override
+    public long getGroupId<span class="params">(int groupPosition)</span> {
+        return groupPosition;
+    }
+
+    @Override
+    public View getGroupView<span class="params">(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent)</span> {
+        GroupHolder holder;
+        GroupItem item = getGroup<span class="params">(groupPosition)</span>;
+        <span class="keyword">if</span> <span class="params">(convertView == null)</span> {
+            holder = new GroupHolder<span class="params">()</span>;
+            convertView = inflater.inflate<span class="params">(R.layout.group_item, parent, <span class="literal">false</span>)</span>;
+            holder.title = <span class="params">(TextView)</span> convertView.findViewById<span class="params">(R.id.textTitle)</span>;
+            convertView.setTag<span class="params">(holder)</span>;
+        } <span class="keyword">else</span> {
+            holder = <span class="params">(GroupHolder)</span> convertView.getTag<span class="params">()</span>;
+        }
+
+        holder.title.setText<span class="params">(item.title)</span>;
+
+        return convertView;
+    }
+
+    @Override
+    public boolean hasStableIds<span class="params">()</span> {
+        return <span class="literal">true</span>;
+    }
+
+    @Override
+    public boolean isChildSelectable<span class="params">(int arg0, int arg1)</span> {
+        return <span class="literal">true</span>;
+    }
+
+}
+@Override
+public void onActivityCreated<span class="params">(Bundle savedInstanceState)</span> {
+    <span class="comment">// <span class="doctag">TODO</span> Auto-generated method stub</span>
+    super.onActivityCreated<span class="params">(savedInstanceState)</span>;
+    setHasOptionsMenu<span class="params">(<span class="literal">true</span>)</span>;
+}
+
+@Override
+public void onCreateOptionsMenu<span class="params">(Menu menu, MenuInflater inflater)</span> {
+    <span class="comment">// <span class="doctag">TODO</span> Auto-generated method stub</span>
+    super.onCreateOptionsMenu<span class="params">(menu, inflater)</span>;
+    inflater.inflate<span class="params">(R.menu.menu, menu)</span>;
+
+    <span class="comment">//Select search item</span>
+    final MenuItem menuItem = menu.findItem<span class="params">(R.id.menu_search)</span>;
+    menuItem.setVisible<span class="params">(<span class="literal">true</span>)</span>;
+
+    SearchView searchView = <span class="params">(SearchView)</span> menuItem.getActionView<span class="params">()</span>;
+    searchView.setQueryHint<span class="params">(this.getString<span class="params">(R.string.search)</span>)</span>;
+
+    <span class="params">(<span class="params">(EditText)</span> searchView.findViewById<span class="params">(R.id.search_src_text)</span>)</span>
+            .setHintTextColor<span class="params">(getResources<span class="params">()</span>.getColor<span class="params">(R.color.nliveo_white)</span>)</span>;
+    searchView.setOnQueryTextListener<span class="params">(onQuerySearchView)</span>;
+
+    menu.findItem<span class="params">(R.id.menu_add)</span>.setVisible<span class="params">(<span class="literal">true</span>)</span>;
+
+    mSearchCheck = <span class="literal">false</span>;    
+}
+
+@Override
+public boolean onOptionsItemSelected<span class="params">(MenuItem item)</span> {
+    <span class="comment">// <span class="doctag">TODO</span> Auto-generated method stub</span>
+
+    switch <span class="params">(item.getItemId<span class="params">()</span>)</span> {
+
+    case R.id.menu_add:
+        Toast.makeText<span class="params">(getActivity<span class="params">()</span>, R.string.add, Toast.LENGTH_SHORT)</span>.show<span class="params">()</span>;
+        break;
+
+    case R.id.menu_search:
+        mSearchCheck = <span class="literal">true</span>;
+        Toast.makeText<span class="params">(getActivity<span class="params">()</span>, R.string.search, Toast.LENGTH_SHORT)</span>.show<span class="params">()</span>;
+        break;
+    }
+    return <span class="literal">true</span>;
+}    
+</code></pre><p>   private SearchView.OnQueryTextListener onQuerySearchView = new SearchView.OnQueryTextListener() {<br>       @Override<br>       public boolean onQueryTextSubmit(String s) {<br>           return false;<br>       }</p>
+<pre><code><span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onQueryTextChange</span><span class="params">(String s)</span> </span>{
+    <span class="keyword">if</span> (mSearchCheck){
+        <span class="comment">// implement your search here</span>
+    }
+    <span class="keyword">return</span> <span class="keyword">false</span>;
+}
+</code></pre><p>   };<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://lixinyang.org/2015/04/20/android解析dataset/" data-id="cicht3gv8000jjq6n7e7hg6c3" class="article-share-link">Share</a>
+      
+        <a href="http://lixinyang.org/2015/04/20/android解析dataset/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-推荐一个开源项目NavigationDrawer-MaterialDesign" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/02/21/推荐一个开源项目NavigationDrawer-MaterialDesign/" class="article-date">
@@ -96,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2015/02/21/推荐一个开源项目NavigationDrawer-MaterialDesign/" data-id="cichsu7in0002fa6nbqdyjnt4" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2015/02/21/推荐一个开源项目NavigationDrawer-MaterialDesign/" data-id="cicht3gup0002jq6n8kb7x28b" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2015/02/21/推荐一个开源项目NavigationDrawer-MaterialDesign/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -142,7 +545,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2015/01/06/2015读书计划/" data-id="cichsu7kg000vfa6nphauhq7m" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2015/01/06/2015读书计划/" data-id="cicht3gvu000wjq6n5wwaq7yt" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2015/01/06/2015读书计划/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -185,7 +588,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/09/01/为什么不喜欢小米/" data-id="cichsu7iv0009fa6n1dpx09d6" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/09/01/为什么不喜欢小米/" data-id="cicht3guv0009jq6nojpqwm6b" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/09/01/为什么不喜欢小米/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -230,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/08/25/Just-For-Fun/" data-id="cichsu7jk000lfa6nymp6nvc9" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/08/25/Just-For-Fun/" data-id="cicht3gvf000mjq6n3u4eifhq" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/08/25/Just-For-Fun/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -274,7 +677,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/07/27/Android-优秀开源项目实现原理解析FROM-GitHub/" data-id="cichsu7k3000tfa6nkd8rawdv" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/07/27/Android-优秀开源项目实现原理解析FROM-GitHub/" data-id="cicht3gvt000ujq6nz388vg7d" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/07/27/Android-优秀开源项目实现原理解析FROM-GitHub/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -319,7 +722,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/07/27/Android开源项目分类汇总FROM-GitHub/" data-id="cichsu7jv000qfa6nq2fceymq" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/07/27/Android开源项目分类汇总FROM-GitHub/" data-id="cicht3gvn000rjq6ne7tdicn8" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/07/27/Android开源项目分类汇总FROM-GitHub/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -365,7 +768,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/07/26/Android进程间通讯/" data-id="cichsu7jn000mfa6nk43olke5" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/07/26/Android进程间通讯/" data-id="cicht3gvh000njq6nuk1kzxvr" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/07/26/Android进程间通讯/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -411,7 +814,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/07/12/下拉刷新初体验之三-ZrcListView/" data-id="cichsu7j0000efa6nexj0swni" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/07/12/下拉刷新初体验之三-ZrcListView/" data-id="cicht3gv0000ejq6nxgkgtrv2" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/07/12/下拉刷新初体验之三-ZrcListView/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -458,7 +861,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/07/05/Material-Design-中文版-转/" data-id="cichsu7j8000jfa6nqekfqoe0" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/07/05/Material-Design-中文版-转/" data-id="cicht3gvd000kjq6nkzwwvz4z" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/07/05/Material-Design-中文版-转/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -504,7 +907,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/06/30/去除app广告/" data-id="cichsu7it0007fa6notpdtmsj" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/06/30/去除app广告/" data-id="cicht3gut0007jq6ncykfi86j" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/06/30/去除app广告/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -549,7 +952,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/06/30/Android深入浅出课程思维导图和Android-知识体系导图/" data-id="cichsu7jr000ofa6ngyzim6mh" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/06/30/Android深入浅出课程思维导图和Android-知识体系导图/" data-id="cicht3gvj000pjq6n8t1z57fy" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/06/30/Android深入浅出课程思维导图和Android-知识体系导图/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -595,7 +998,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/04/05/下拉刷新初体验之二-SwipeRefreshLayout/" data-id="cichsu7iy000cfa6npfrkwmsg" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/04/05/下拉刷新初体验之二-SwipeRefreshLayout/" data-id="cicht3gux000cjq6n04srk0ly" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/04/05/下拉刷新初体验之二-SwipeRefreshLayout/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -640,7 +1043,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2014/04/04/下拉刷新初体验之一-XListView/" data-id="cichsu7j3000gfa6n3jipxv07" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2014/04/04/下拉刷新初体验之一-XListView/" data-id="cicht3gv2000gjq6natdj1h8t" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2014/04/04/下拉刷新初体验之一-XListView/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -686,7 +1089,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2013/12/21/逆向分析某apk/" data-id="cichsu7ij0001fa6nmpl6j1hy" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2013/12/21/逆向分析某apk/" data-id="cicht3gun0001jq6ne8ae71fr" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2013/12/21/逆向分析某apk/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -729,7 +1132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2013/11/27/Android与windows软件安全基础/" data-id="cichsu7jy000sfa6nxlwd9aia" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2013/11/27/Android与windows软件安全基础/" data-id="cicht3gvq000tjq6n4e9yl4bk" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2013/11/27/Android与windows软件安全基础/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -772,7 +1175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2012/11/23/-吐槽向-中国用户长啥样-转自锋客网/" data-id="cichsu7ht0000fa6n7f1verrp" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/2012/11/23/-吐槽向-中国用户长啥样-转自锋客网/" data-id="cicht3gua0000jq6nutyzy1gc" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/2012/11/23/-吐槽向-中国用户长啥样-转自锋客网/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -816,7 +1219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://lixinyang.org/1994/01/19/hello-world/" data-id="cichsu7j5000ifa6nv0ovuhdt" class="article-share-link">Share</a>
+      <a data-url="http://lixinyang.org/1994/01/19/hello-world/" data-id="cicht3gv4000ijq6nmkk4q0ch" class="article-share-link">Share</a>
       
         <a href="http://lixinyang.org/1994/01/19/hello-world/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -857,7 +1260,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1994/01/">一月 1994</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1994/01/">一月 1994</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -867,6 +1270,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/04/20/android解析dataset/">android解析dataset</a>
+          </li>
         
           <li>
             <a href="/2015/02/21/推荐一个开源项目NavigationDrawer-MaterialDesign/">推荐一个开源项目NavigationDrawer-MaterialDesign</a>
@@ -882,10 +1289,6 @@
         
           <li>
             <a href="/2014/08/25/Just-For-Fun/">Just For Fun</a>
-          </li>
-        
-          <li>
-            <a href="/2014/07/27/Android-优秀开源项目实现原理解析FROM-GitHub/">Android 优秀开源项目实现原理解析FROM GitHub</a>
           </li>
         
       </ul>
