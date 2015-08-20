@@ -1,11 +1,43 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="theme-next use-motion ">
 <head>
-  <meta charset="utf-8">
   
-  <title>Android与windows软件安全基础 | lixinyang</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Android与windows软件安全基础青少年总是充满好奇心，你我大家都一样，从最开始的windows软件逆向分析破解到android软件的逆向我的兴趣有增无减，正所谓站在巨人的肩膀上我们可以看得更远，下面我就以一些我看过的书和例子（《android软件安全与逆向分析》，《黑客破解精通》《0day软件安全》《黑客防线2009缓冲区溢出攻击与防范专辑》）简单的分析下windows平台和androi">
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="Android与windows软件安全基础青少年总是充满好奇心，你我大家都一样，从最开始的windows软件逆向分析破解到android软件的逆向我的兴趣有增无减，正所谓站在巨人的肩膀上我们可以看得更远，下面我就以一些我看过的书和例子（《android软件安全与逆向分析》，《黑客破解精通》《0day软件安全》《黑客防线2009缓冲区溢出攻击与防范专辑》）简单的分析下windows平台和androi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android与windows软件安全基础">
 <meta property="og:url" content="http://lixinyang.org/2013/11/27/Android与windows软件安全基础/index.html">
@@ -17,78 +49,150 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android与windows软件安全基础">
 <meta name="twitter:description" content="Android与windows软件安全基础青少年总是充满好奇心，你我大家都一样，从最开始的windows软件逆向分析破解到android软件的逆向我的兴趣有增无减，正所谓站在巨人的肩膀上我们可以看得更远，下面我就以一些我看过的书和例子（《android软件安全与逆向分析》，《黑客破解精通》《0day软件安全》《黑客防线2009缓冲区溢出攻击与防范专辑》）简单的分析下windows平台和androi">
-  
-    <link rel="alternative" href="/atom.xml" title="lixinyang" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  
 
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> Android与windows软件安全基础 | lixinyang </title>
 </head>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">lixinyang</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Read The Fucking Source Code</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://lixinyang.org"></form>
-      </div>
-    </div>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
   </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-Android与windows软件安全基础" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/11/27/Android与windows软件安全基础/" class="article-date">
-  <time datetime="2013-11-27T13:29:27.000Z" itemprop="datePublished">11月 27 2013</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Android与windows软件安全基础
-    </h1>
+<![endif]-->
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">lixinyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
       
-        <p>Android与windows软件安全基础<br>青少年总是充满好奇心，你我大家都一样，从最开始的windows软件逆向分析破解到android软件的逆向我的兴趣有增无减，正所谓站在巨人的肩膀上我们可以看得更远，下面我就以一些我看过的书和例子（《android软件安全与逆向分析》，《黑客破解精通》《0day软件安全》《黑客防线2009缓冲区溢出攻击与防范专辑》）简单的分析下windows平台和android下软件安全的一些东西包括破解，溢出攻击，反破解的基础知识。 <a id="more"></a>为了照顾初学者我就用简单的例子吧，windows是大家最先接触的系统，所以就从win下开始分析一个简单的小程序我给大家粘贴点源码看看，在vc6下编译可以通过，注意build要用debug版本，而不是release<br><figure class="highlight"><figcaption><span><stdio.h></stdio.h></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define PASSWORD &#34;1234567&#34;&#10;int verify_password (char *password)&#10;&#123;&#10;    int authenticated;&#10;    authenticated=strcmp(password,PASSWORD);&#10;    return authenticated;&#10;&#125;&#10;main()&#10;&#123;&#10;    int valid_flag=0;&#10;    char password[1024];&#10;    while(1)&#10;    &#123;&#10;        printf(&#34;please input password:       &#34;);&#10;        scanf(&#34;%s&#34;,password);&#10;        valid_flag = verify_password(password);&#10;        if(valid_flag)&#10;        &#123;&#10;            printf(&#34;incorrect password!\n\n&#34;);&#10;        &#125;&#10;        else&#10;        &#123;&#10;            printf(&#34;Congratulation! You have passed the verification!\n&#34;);&#10;            break;&#10;        &#125;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Android与windows软件安全基础
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2013-11-27T21:29:27+08:00" content="11月 27 2013">
+            11月 27 2013
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2013/11/27/Android与windows软件安全基础/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/11/27/Android与windows软件安全基础/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>Android与windows软件安全基础<br>青少年总是充满好奇心，你我大家都一样，从最开始的windows软件逆向分析破解到android软件的逆向我的兴趣有增无减，正所谓站在巨人的肩膀上我们可以看得更远，下面我就以一些我看过的书和例子（《android软件安全与逆向分析》，《黑客破解精通》《0day软件安全》《黑客防线2009缓冲区溢出攻击与防范专辑》）简单的分析下windows平台和android下软件安全的一些东西包括破解，溢出攻击，反破解的基础知识。 <a id="more"></a>为了照顾初学者我就用简单的例子吧，windows是大家最先接触的系统，所以就从win下开始分析一个简单的小程序我给大家粘贴点源码看看，在vc6下编译可以通过，注意build要用debug版本，而不是release<br><figure class="highlight"><figcaption><span><stdio.h></stdio.h></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define PASSWORD &#34;1234567&#34;&#10;int verify_password (char *password)&#10;&#123;&#10;    int authenticated;&#10;    authenticated=strcmp(password,PASSWORD);&#10;    return authenticated;&#10;&#125;&#10;main()&#10;&#123;&#10;    int valid_flag=0;&#10;    char password[1024];&#10;    while(1)&#10;    &#123;&#10;        printf(&#34;please input password:       &#34;);&#10;        scanf(&#34;%s&#34;,password);&#10;        valid_flag = verify_password(password);&#10;        if(valid_flag)&#10;        &#123;&#10;            printf(&#34;incorrect password!\n\n&#34;);&#10;        &#125;&#10;        else&#10;        &#123;&#10;            printf(&#34;Congratulation! You have passed the verification!\n&#34;);&#10;            break;&#10;        &#125;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>相信大家都看得懂吧，简略说一下这是一个密码验证程序，你输入的密码是1234567的话就会出现Congratulation! You have passed the verification!，程序中有一个if判断，就是有两个跳转一个正确一个错误，为了让大家看的清晰我把编译好的程序附加到ida中给大家看看<br><img src="http://www.apkbus.com/data/attachment/forum/201310/27/113802dhob6h7x4i7jih52.png" alt="image"></p>
 <p>我补充一下学习软件安全是要有一定的汇编语言基础的，win下的话有好多书籍资料，android下的话要学习一下dalvik指令和ARM汇编语言，顺带介绍一下win的反汇编工具olldbg和IDA，android程序的反汇编工具apktool很流行，但IDA更清晰好用，win和android程序都可以用IDA来反汇编，好了再把它附加到od中分析，通过字符串搜索直接来到关键位置我把汇编语言代码粘贴出来<br><figure class="highlight"><figcaption><span>90            nop</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00401040  /$  81EC 00040000 sub esp,0x400&#10;00401046  |&#62;  68 88804000   /push crack_me.00408088                  ;  please input password:&#10;0040104B  |.  E8 57000000   |call crack_me.004010A7&#10;00401050  |.  8D4424 04     |lea eax,dword ptr ss:[esp+0x4]&#10;00401054  |.  50            |push eax                                ;  kernel32.BaseThreadInitThunk&#10;00401055  |.  68 84804000   |push crack_me.00408084                  ;  %s&#10;0040105A  |.  E8 31000000   |call crack_me.00401090&#10;0040105F  |.  8D4C24 0C     |lea ecx,dword ptr ss:[esp+0xC]&#10;00401063  |.  51            |push ecx&#10;00401064  |.  E8 97FFFFFF   |call crack_me.00401000&#10;00401069  |.  83C4 10       |add esp,0x10&#10;0040106C  |.  85C0          |test eax,eax                            ;  kernel32.BaseThreadInitThunk&#10;0040106E  |.  74 0F         |je short crack_me.0040107F&#10;00401070  |.  68 6C804000   |push crack_me.0040806C                  ;  incorrect password!\n\n&#10;00401075  |.  E8 2D000000   |call crack_me.004010A7&#10;0040107A  |.  83C4 04       |add esp,0x4&#10;0040107D  |.^ EB C7         \jmp short crack_me.00401046&#10;0040107F  |&#62;  68 38804000   push crack_me.00408038                   ;  Congratulation! You have passed the verification!\n&#10;00401084  |.  E8 1E000000   call crack_me.004010A7&#10;00401089  |.  81C4 04040000 add esp,0x404&#10;0040108F  \.  C3            retn</span><br></pre></td></tr></table></figure></p>
 <p>我大体说明下汇编指令的意义，call就是调用函数，jmp就是无条件跳转，add esp，xx是用来恢复堆栈的，我在说下函数调用时的堆栈变化<br>1父函数将函数的实参从右往左压入堆栈<br>2cpu将父函数中函数调用指令Call xxxx的下一条指令地址eip压入堆栈<br>3父函数通过Push Ebp指令将基址指针EBP值压入堆栈，并通过Mov Ebp，Esp<br>指令将当前堆栈指针Esp值传递给Ebp<br>4通过Sub Esp，m为存放在函数中的局部变量开辟内存，函数执行中可以通过EBP来指引完成<br>上面汇编代码给的很清晰，有跳向正确和错误的跳转分别是<br>0040107D  |.^ EB C7         \jmp short crack_me.00401046</p>
@@ -143,156 +247,411 @@ iget-object </span><span class="variable">v0</span>, <span class="variable">p0</
 <span class="comment">#getter for: Lcom/droider/crackme0201/MainActivity;-&gt;btn_register:Landroid/widget/Button;   设置按钮属性</span><span class="instruction">
 invoke-static </span>{<span class="variable">v0</span>}, <span class="class">Lcom/droider/crackme0201/MainActivity;</span><span class="function">-&gt;access$3(</span><span class="class">Lcom/droider/crackme0201/MainActivity;</span><span class="function">)</span><span class="class">Landroid/widget/Button;</span>
 </code></pre><p>move-result-object v0<br>上面有一个关键  if-nez v0, :cond_0，我们乱输入用户名和sn的话这个跳转就会实现，不等于0则跳转，我们让他相反吧，改成if-eqz v0, :cond_0，这个跳转指令和nez相反的，类似的跳转指令还有很多，好了我们保存编译，然后签名，随便输入都显示注册成功了，我在网上看了一下现在游戏android软件还有人这样破解，就是反编译后把付费后的函数内容复制到付费前的那个函数里面，达到了破解付费软件的效果，这只是一个简单的例子，现在android确实有了好多代码混淆工具还有壳子，壳比较少，当然这只能组织一些入门级的小白，呵呵，更深入的学习还多呢<br>关于android溢出，由于java语言的特性比较少，但原理和windows软件相似，前段时间有个Android系统的WebView控件任意命令执行漏洞，android的sdk中封装了webView控件。这个控件主要用开控制的网页浏览。其中webView下有一个非常特殊的接口函数addJavascriptInterface，能实现本地java和js的交互。利用addJavascriptInterface这个接口函数可实现穿透webkit控制android 本机。攻击者可以构建恶意WEB页，诱使用户解析，可以应用程序上下文执行任意命令。Android安全方面主要存在于数据信息的加密，还有一些恶意软件的威胁，一般都容易看出，因为在主activity中会有一些敏感的操作和服务，好了由于只是初级探索我们到此结束，感兴趣的可以继续深入下去，我们需要学习的东西还很多呢<br>demo地址：<a href="http://pan.baidu.com/s/1qWPndRA" target="_blank" rel="external">http://pan.baidu.com/s/1qWPndRA</a></p>
-
+</span>
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://lixinyang.org/2013/11/27/Android与windows软件安全基础/" data-id="cidkckyua000v2w6ntf2070b6" class="article-share-link">Share</a>
+
+    <footer class="post-footer">
       
-        <a href="http://lixinyang.org/2013/11/27/Android与windows软件安全基础/#disqus_thread" class="article-comment-link">Comments</a>
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/12/21/逆向分析某apk/" rel="prev">逆向分析某apk</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012/11/23/-吐槽向-中国用户长啥样-转自锋客网/" rel="next">[吐槽向]中国用户长啥样 转自锋客网</a>
+            
+          </div>
+        </div>
+      
+
       
       
     </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2013/12/21/逆向分析某apk/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+
+ </div>
+
         
-          逆向分析某apk
+
+        
+          <div class="comments" id="comments">
+            
+              <div id="disqus_thread">
+                <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              </div>
+            
+          </div>
         
       </div>
-    </a>
-  
-  
-    <a href="/2012/11/23/-吐槽向-中国用户长啥样-转自锋客网/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">[吐槽向]中国用户长啥样 转自锋客网</div>
-    </a>
-  
-</nav>
 
+      
   
-</article>
-
-
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">1</span></li></ul>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
-    </div>
-  </div>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">四月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/11/">十一月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1994/01/">一月 1994</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2015/08/20/经管工作记录/">经管工作记录</a>
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
           </li>
-        
-          <li>
-            <a href="/2015/08/15/peter/">peter</a>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
           </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="lixinyang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">lixinyang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
         
-          <li>
-            <a href="/2015/04/20/android解析dataset/">android解析dataset</a>
-          </li>
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
         
-          <li>
-            <a href="/2015/02/21/推荐一个开源项目NavigationDrawer-MaterialDesign/">推荐一个开源项目NavigationDrawer-MaterialDesign</a>
-          </li>
         
-          <li>
-            <a href="/2015/01/06/2015读书计划/">2015读书计划</a>
-          </li>
-        
-      </ul>
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目錄</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
     </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lixinyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
   </div>
 
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
   
-</aside>
-        
-      </div>
-      <footer id="footer">
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2015 lixinyang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
     
-<script>
-  var disqus_shortname = 'lixinyang';
+    
+
   
-  var disqus_url = 'http://lixinyang.org/2013/11/27/Android与windows软件安全基础/';
+
+    <script type="text/javascript">
+      var disqus_shortname = 'lixinyang';
+      var disqus_identifier = '2013/11/27/Android与windows软件安全基础/';
+      var disqus_title = 'Android与windows软件安全基础';
+      var disqus_url = 'http://lixinyang.org/2013/11/27/Android与windows软件安全基础/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
-  (function(){
-    var dsq = document.createElement('script');
-    dsq.type = 'text/javascript';
-    dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
 </script>
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  
 
+  
+  
 
-<script src="/js/script.js" type="text/javascript"></script>
-
-  </div>
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
 </body>
 </html>
