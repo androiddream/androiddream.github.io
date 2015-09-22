@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="android," />
+  <meta name="keywords" content="Hexo,next" />
 
 
 
@@ -35,22 +35,26 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description">
+<meta name="description" content="手写代码实现android滑动banner的实现
+viewpager的使用自定义ViewPagerIndicate自动滚动GitHub:https://github.com/androiddream/AndroidBanner_demo
+github类似源码推荐1.CircleIndicator
+一个轻量级的viewpager指示器 ，类似于nexus5 启动器的效果。它可以自定义指示器上小圆点的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="下拉刷新初体验之一  XListView">
-<meta property="og:url" content="http://lixinyang.org/2014/04/04/下拉刷新初体验之一-XListView/index.html">
+<meta property="og:title" content="android滑动banner的实现">
+<meta property="og:url" content="http://lixinyang.org/2015/09/22/android滑动banner的实现/index.html">
 <meta property="og:site_name" content="lixinyang">
-<meta property="og:description">
-<meta property="og:image" content="https://raw.githubusercontent.com/Maxwin-z/XListView-Android/master/screenshots/refresh_ready.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Maxwin-z/XListView-Android/master/screenshots/refresh_loading.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Maxwin-z/XListView-Android/master/screenshots/load_more_loading.png">
-<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2014-07-05-23-09-15.png">
-<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2014-07-05-23-09-22.png">
-<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2014-07-05-23-09-28.png">
-<meta property="og:updated_time" content="2015-02-20T10:50:22.000Z">
+<meta property="og:description" content="手写代码实现android滑动banner的实现
+viewpager的使用自定义ViewPagerIndicate自动滚动GitHub:https://github.com/androiddream/AndroidBanner_demo
+github类似源码推荐1.CircleIndicator
+一个轻量级的viewpager指示器 ，类似于nexus5 启动器的效果。它可以自定义指示器上小圆点的">
+<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/android.gif">
+<meta property="og:updated_time" content="2015-09-22T12:50:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="下拉刷新初体验之一  XListView">
-<meta name="twitter:description">
+<meta name="twitter:title" content="android滑动banner的实现">
+<meta name="twitter:description" content="手写代码实现android滑动banner的实现
+viewpager的使用自定义ViewPagerIndicate自动滚动GitHub:https://github.com/androiddream/AndroidBanner_demo
+github类似源码推荐1.CircleIndicator
+一个轻量级的viewpager指示器 ，类似于nexus5 启动器的效果。它可以自定义指示器上小圆点的">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -60,7 +64,7 @@
   };
 </script>
 
-  <title> 下拉刷新初体验之一  XListView | lixinyang </title>
+  <title> android滑动banner的实现 | lixinyang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -159,7 +163,7 @@
           
           
             
-              下拉刷新初体验之一  XListView
+              android滑动banner的实现
             
           
         </h1>
@@ -168,8 +172,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2014-04-04T18:26:14+08:00" content="Apr 4 2014">
-            Apr 4 2014
+          <time itemprop="dateCreated" datetime="2015-09-22T18:21:16+08:00" content="Sep 22 2015">
+            Sep 22 2015
           </time>
         </span>
 
@@ -179,8 +183,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/04/04/下拉刷新初体验之一-XListView/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/04/04/下拉刷新初体验之一-XListView/" itemprop="commentsCount"></span>
+            <a href="/2015/09/22/android滑动banner的实现/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/22/android滑动banner的实现/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -194,39 +198,36 @@
       
 
       
-        <span itemprop="articleBody"><p><img src="https://raw.githubusercontent.com/Maxwin-z/XListView-Android/master/screenshots/refresh_ready.png" alt="image"><br><a id="more"></a><img src="https://raw.githubusercontent.com/Maxwin-z/XListView-Android/master/screenshots/refresh_loading.png" alt="image"><br><img src="https://raw.githubusercontent.com/Maxwin-z/XListView-Android/master/screenshots/load_more_loading.png" alt="image"></p>
-<p>贴个github地址，XlistView包含了上拉刷新与下拉刷新</p>
-<p><a href="https://github.com/Maxwin-z/XListView-Android" target="_blank" rel="external">https://github.com/Maxwin-z/XListView-Android</a></p>
-<p>想在自己的项目中使用可以把它变成库，在Is Library那里勾一下就行</p>
-<p>使用时要记得设置监听器setXListViewListener()</p>
-<p>下拉刷新的方法是onRefresh()</p>
-<p>上拉刷新的方法是onLoadMore()</p>
-<p>下面贴下源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">package com.lee.examplate;&#10;import java.util.ArrayList;&#10;import java.util.Date;&#10;import java.util.Iterator;&#10;import me.maxwin.view.XListView;&#10;import me.maxwin.view.XListView.IXListViewListener;&#10;import android.os.Bundle;&#10;import android.os.Handler;&#10;import android.app.Activity;&#10;import android.view.Menu;&#10;import android.widget.ArrayAdapter;&#10;public class MainActivity extends Activity implements IXListViewListener &#123;&#10;private XListView xlistview;&#10;private Handler mHandler;&#10;private ArrayAdapter&#38;lt;String&#38;gt; mAdapter;&#10;private ArrayList&#38;lt;String&#38;gt; items = new ArrayList&#38;lt;String&#38;gt;();&#10;@Override&#10;protected void onCreate(Bundle savedInstanceState) &#123;&#10;super.onCreate(savedInstanceState);&#10;setContentView(R.layout.activity_main);&#10;xlistview= (XListView) findViewById(R.id.xListView);&#10;xlistview.setPullLoadEnable(true);&#10;mAdapter = new ArrayAdapter&#38;lt;String&#38;gt;(this, android.R.layout.simple_list_item_1, items);&#10;xlistview.setAdapter(mAdapter);&#10;xlistview.setPullLoadEnable(true);&#10;xlistview.setPullRefreshEnable(true);&#10;xlistview.setXListViewListener(this);&#10;mHandler = new Handler();&#10;initData();&#10;&#125;&#10;private void initData() &#123;&#10;for (int i = 0; i &#38;lt; 10; i++) &#123;&#10;items.add(&#34;lixinyangblog.com&#34;+i);&#10;&#125;&#10;// TODO Auto-generated method stub&#10;&#125;&#10;@Override&#10;public void onRefresh() &#123;&#10;mHandler.postDelayed(new Runnable() &#123;&#10;// TODO Auto-generated method stub&#10;@Override&#10;public void run() &#123;&#10;items.add(0, &#34;new data&#34;+new Date());&#10;mAdapter.notifyDataSetChanged();&#10;xlistview.stopRefresh();&#10;&#125;&#125;, 2000);&#10;//&#19979;&#25289;&#21047;&#26032;&#30340;&#26041;&#27861;&#10;&#125;&#10;@Override&#10;public void onLoadMore() &#123;&#10;//&#19978;&#25289;&#21047;&#26032;&#30340;&#26041;&#27861;&#10;mHandler.postDelayed(new Runnable() &#123;&#10;// TODO Auto-generated method stub&#10;@Override&#10;public void run() &#123;&#10;items.add(&#34;new data&#34;+new Date());&#10;mAdapter.notifyDataSetChanged();&#10;xlistview.stopLoadMore();&#10;&#125;&#125;, 2000);&#10;// TODO Auto-generated method stub&#10;&#125;&#10;@Override&#10;public boolean onCreateOptionsMenu(Menu menu) &#123;&#10;// Inflate the menu; this adds items to the action bar if it is present.&#10;getMenuInflater().inflate(R.menu.main, menu);&#10;return true;&#10;&#125;&#10;&#125;&#10;&#60;RelativeLayout xmlns:android=&#8221;http://schemas.android.com/apk/res/android&#8221;&#10;xmlns:tools=&#8221;http://schemas.android.com/tools&#8221;&#10;android:layout_width=&#8221;match_parent&#8221;&#10;android:layout_height=&#8221;match_parent&#8221;&#10;tools:context=&#8221;.MainActivity&#8221; &#62;&#10;&#60;me.maxwin.view.XListView&#10;android:id=&#8221;@+id/xListView&#8221;&#10;android:layout_width=&#8221;fill_parent&#8221;&#10;android:layout_height=&#8221;fill_parent&#8221; android:cacheColorHint=&#8221;#00000000&#8243;&#62;&#10;&#60;/me.maxwin.view.XListView&#62;&#10;&#60;/RelativeLayout</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2014-07-05-23-09-15.png" alt="image"><br><img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2014-07-05-23-09-22.png" alt="image"><br><img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2014-07-05-23-09-28.png" alt="image"></p>
+        <span itemprop="articleBody"><p>手写代码实现android滑动banner的实现<br><img src="http://7vzq44.com1.z0.glb.clouddn.com/android.gif" alt="image"></p>
+<h3 id="viewpager的使用">viewpager的使用</h3><h3 id="自定义ViewPagerIndicate">自定义ViewPagerIndicate</h3><h3 id="自动滚动">自动滚动</h3><p>GitHub:<a href="https://github.com/androiddream/AndroidBanner_demo" target="_blank" rel="external">https://github.com/androiddream/AndroidBanner_demo</a></p>
+<h3 id="github类似源码推荐">github类似源码推荐</h3><p>1.CircleIndicator</p>
+<p>一个轻量级的viewpager指示器 ，类似于nexus5 启动器的效果。它可以自定义指示器上小圆点的样式和动画效果。可以用于引导页。</p>
+<p>项目地址：<a href="https://github.com/ongakuer/CircleIndicator" target="_blank" rel="external">https://github.com/ongakuer/CircleIndicator</a></p>
+<p>2.Guideshow</p>
+<p>Guideshow使你简单、快速的构建引导页。另外，你无须生成动态的gif图片就可使页面产生动画效果，如平移、渐变。<br>项目地址：<a href="https://github.com/javajavadog/guideshow" target="_blank" rel="external">https://github.com/javajavadog/guideshow</a></p>
+<p>3.AppIntro</p>
+<p>尝试使用了下，确实是个漂亮的控件，而且使用也很简单，推荐使用。</p>
+<p>项目地址：<a href="https://github.com/PaoloRotolo/AppIntro" target="_blank" rel="external">https://github.com/PaoloRotolo/AppIntro</a></p>
+<p>4.SwitchViewDemo</p>
+<p>一个简单的引导页实现。值得推荐的是这完全是个单独的控件，而不是借助ViewPager实现的。作者完全是扩展ViewGroup做的。有兴趣的可以参考作者的设计。</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/android/" rel="tag">#android</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/04/05/下拉刷新初体验之二-SwipeRefreshLayout/" rel="prev">下拉刷新初体验之二 SwipeRefreshLayout</a>
+              <a href="/2015/09/22/eventbus的使用与学习/" rel="prev">eventbus的使用与学习</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2013/12/21/逆向分析某apk/" rel="next">逆向分析某apk</a>
+              <a href="/2015/08/20/经管工作记录/" rel="next">经管工作记录</a>
             
           </div>
         </div>
@@ -352,7 +353,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#viewpager的使用"><span class="nav-number">1.</span> <span class="nav-text">viewpager的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义ViewPagerIndicate"><span class="nav-number">2.</span> <span class="nav-text">自定义ViewPagerIndicate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动滚动"><span class="nav-number">3.</span> <span class="nav-text">自动滚动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github类似源码推荐"><span class="nav-number">4.</span> <span class="nav-text">github类似源码推荐</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -406,9 +407,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'lixinyang';
-      var disqus_identifier = '2014/04/04/下拉刷新初体验之一-XListView/';
-      var disqus_title = '下拉刷新初体验之一  XListView';
-      var disqus_url = 'http://lixinyang.org/2014/04/04/下拉刷新初体验之一-XListView/';
+      var disqus_identifier = '2015/09/22/android滑动banner的实现/';
+      var disqus_title = 'android滑动banner的实现';
+      var disqus_url = 'http://lixinyang.org/2015/09/22/android滑动banner的实现/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
