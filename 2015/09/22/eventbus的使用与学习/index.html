@@ -41,7 +41,7 @@
 <meta property="og:url" content="http://lixinyang.org/2015/09/22/eventbus的使用与学习/index.html">
 <meta property="og:site_name" content="lixinyang">
 <meta property="og:description" content="首先贴个地址https://github.com/greenrobot/EventBus Android EventBus是基于事件驱动的一个开源库，也算是一个观察者模式Observe，扩展性强使用简单，用发布者和订阅者很好的解决了两个模块之间的通信，如Fragment和Activity，Activity和Service之间的通信啊，支持自定义消息类型来传输，最近公司的一个项目控制音乐的播放，我也">
-<meta property="og:updated_time" content="2016-01-01T12:31:11.000Z">
+<meta property="og:updated_time" content="2016-01-01T12:38:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="eventbus的使用与学习">
 <meta name="twitter:description" content="首先贴个地址https://github.com/greenrobot/EventBus Android EventBus是基于事件驱动的一个开源库，也算是一个观察者模式Observe，扩展性强使用简单，用发布者和订阅者很好的解决了两个模块之间的通信，如Fragment和Activity，Activity和Service之间的通信啊，支持自定义消息类型来传输，最近公司的一个项目控制音乐的播放，我也">
@@ -188,7 +188,7 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="首先贴个地址">首先贴个地址</h3><h3 id="https://github-com/greenrobot/EventBus"><a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">https://github.com/greenrobot/EventBus</a></h3><p> <code>Android EventBus</code>是基于事件驱动的一个开源库，也算是一个观察者模式Observe，扩展性强使用简单，用发布者和订阅者很好的解决了两个模块之间的通信，如Fragment和Activity，Activity和Service之间的通信啊，支持自定义消息类型来传输，最近公司的一个项目控制音乐的播放，我也用到了EventBus，由Activity向Service发送消息，Service来控制音乐曲目的播放，代码片段<br> Service</p>
+        <span itemprop="articleBody"><h3 id="首先贴个地址">首先贴个地址</h3><h3 id="https://github-com/greenrobot/EventBus"><a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">https://github.com/greenrobot/EventBus</a></h3><p> <code>Android EventBus</code>是基于事件驱动的一个开源库，也算是一个观察者模式Observe，扩展性强使用简单，用发布者和订阅者很好的解决了两个模块之间的通信，如Fragment和Activity，Activity和Service之间的通信啊，支持自定义消息类型来传输，最近公司的一个项目控制音乐的播放，我也用到了EventBus，由Activity向Service发送消息，Service来控制音乐曲目的播放，代码片段<br> <a id="more"></a><br> Service</p>
 <pre><code>public void onEventBackgroundThread<span class="params">(MyEvent event)</span>{
 
     Log.e<span class="params">(<span class="string">"TAGEVENT"</span>,event.getPath<span class="params">()</span>)</span>;
@@ -308,9 +308,14 @@ public IBinder onBind<span class="params">(Intent intent)</span>
 }
 </code></pre><p>}</p>
 <p>Activity</p>
-<p>  //背景音乐设置————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————<br>`            if (mScenes.get(position).getBackground_music() == “null”) {<br>                Log.e(“error”, “/storage/emulated/legacy/res/common/sound/“ + mScenes.get(position).getBackground_music());<br>                EventBus.getDefault().post(new MyEvent(“null”));<br>            } else {<br>                EventBus.getDefault().post(new MyEvent(“/storage/emulated/legacy/res/common/sound/“ + mScenes.get(position).getBackground_music()));<br>                Log.e(“bmg”, “/storage/emulated/legacy/res/common/sound/“ + mScenes.get(position).getBackground_music());</p>
-<pre><code>}`
-</code></pre></span>
+<p>  //背景音乐设置————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————<br><code>if (mScenes.get(position).getBackground_music() == &quot;null&quot;) {
+                Log.e(&quot;error&quot;, &quot;/storage/emulated/legacy/res/common/sound/&quot; + mScenes.get(position).getBackground_music());
+                EventBus.getDefault().post(new MyEvent(&quot;null&quot;));
+            } else {
+                EventBus.getDefault().post(new MyEvent(&quot;/storage/emulated/legacy/res/common/sound/&quot; + mScenes.get(position).getBackground_music()));
+                Log.e(&quot;bmg&quot;, &quot;/storage/emulated/legacy/res/common/sound/&quot; + mScenes.get(position).getBackground_music());
+            }</code></p>
+</span>
       
     </div>
 
