@@ -265,7 +265,129 @@
 
       
         
-          <span itemprop="articleBody"></span>
+          <span itemprop="articleBody"><h3 id="首先贴个地址">首先贴个地址</h3><h3 id="https://github-com/greenrobot/EventBus"><a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">https://github.com/greenrobot/EventBus</a></h3><p> <code>Android EventBus</code>是基于事件驱动的一个开源库，也算是一个观察者模式Observe，扩展性强使用简单，用发布者和订阅者很好的解决了两个模块之间的通信，如Fragment和Activity，Activity和Service之间的通信啊，支持自定义消息类型来传输，最近公司的一个项目控制音乐的播放，我也用到了EventBus，由Activity向Service发送消息，Service来控制音乐曲目的播放，代码片段<br> Service</p>
+<pre><code>public void onEventBackgroundThread<span class="params">(MyEvent event)</span>{
+
+    Log.e<span class="params">(<span class="string">"TAGEVENT"</span>,event.getPath<span class="params">()</span>)</span>;
+
+    <span class="keyword">if</span> <span class="params">(event.getPath<span class="params">()</span>==<span class="string">"null"</span>)</span>
+    {
+
+        <span class="keyword">if</span> <span class="params">(mPlayer.isPlaying<span class="params">()</span>==<span class="literal">false</span>)</span>
+        {
+            int r=new Random<span class="params">()</span>.nextInt<span class="params">(<span class="number">8</span>)</span>;
+            Log.e<span class="params">(<span class="string">"TAGRANDOM"</span>,<span class="string">""</span>+r)</span>;
+            mPlayer.reset<span class="params">()</span>;<span class="comment">//idle</span>
+            try
+            {
+                mPlayer.setDataSource<span class="params">(<span class="string">"/storage/emulated/legacy/res/common/sound/"</span>+musicesource[r]+<span class="string">".mp3"</span>)</span>;
+                mPlayer.prepare<span class="params">()</span>;
+                mPlayer.start<span class="params">()</span>;
+            }
+            catch <span class="params">(IllegalArgumentException e)</span>
+            {
+                e.printStackTrace<span class="params">()</span>;
+            }
+            catch <span class="params">(SecurityException e)</span>
+            {
+                e.printStackTrace<span class="params">()</span>;
+            }
+            catch <span class="params">(IllegalStateException e)</span>
+            {
+                e.printStackTrace<span class="params">()</span>;
+            }
+            catch <span class="params">(IOException e)</span>
+            {
+                e.printStackTrace<span class="params">()</span>;
+            }
+
+        }
+        <span class="keyword">else</span>
+        {
+            Log.e<span class="params">(<span class="string">"TAGP"</span>,<span class="string">"We are Playing ,baby"</span>)</span>;
+        }
+    }
+    <span class="keyword">else</span>
+    {
+
+        Log.d<span class="params">(<span class="string">"harvic"</span>, <span class="string">"onEventBackground收到了消息："</span> + event.getPath<span class="params">()</span>)</span>;
+
+        mPlayer.reset<span class="params">()</span>;<span class="comment">//idle</span>
+        try
+        {
+            mPlayer.setDataSource<span class="params">(event.getPath<span class="params">()</span>)</span>;
+            mPlayer.prepare<span class="params">()</span>;
+            mPlayer.start<span class="params">()</span>;
+        }
+        catch <span class="params">(IllegalArgumentException e)</span>
+        {
+            e.printStackTrace<span class="params">()</span>;
+        }
+        catch <span class="params">(SecurityException e)</span>
+        {
+            e.printStackTrace<span class="params">()</span>;
+        }
+        catch <span class="params">(IllegalStateException e)</span>
+        {
+            e.printStackTrace<span class="params">()</span>;
+        }
+        catch <span class="params">(IOException e)</span>
+        {
+            e.printStackTrace<span class="params">()</span>;
+        }
+    }
+
+
+
+}
+public void play<span class="params">()</span>
+{
+    mPlayer.reset<span class="params">()</span>;<span class="comment">//idle</span>
+    try
+    {
+        mPlayer.setDataSource<span class="params">(path)</span>;
+        mPlayer.prepare<span class="params">()</span>;
+        mPlayer.start<span class="params">()</span>;
+    }
+    catch <span class="params">(IllegalArgumentException e)</span>
+    {
+        e.printStackTrace<span class="params">()</span>;
+    }
+    catch <span class="params">(SecurityException e)</span>
+    {
+        e.printStackTrace<span class="params">()</span>;
+    }
+    catch <span class="params">(IllegalStateException e)</span>
+    {
+        e.printStackTrace<span class="params">()</span>;
+    }
+    catch <span class="params">(IOException e)</span>
+    {
+        e.printStackTrace<span class="params">()</span>;
+    }
+
+}
+
+class MediaBinder extends Binder
+{
+    public void play<span class="params">()</span>
+    {
+        MediaService.this.play<span class="params">()</span>;
+    }
+}
+
+
+
+@Override
+public IBinder onBind<span class="params">(Intent intent)</span>
+{
+    return new MediaBinder<span class="params">()</span>;
+}
+</code></pre><p>}</p>
+<p>Activity</p>
+<p>  //背景音乐设置————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————<br>`            if (mScenes.get(position).getBackground_music() == “null”) {<br>                Log.e(“error”, “/storage/emulated/legacy/res/common/sound/“ + mScenes.get(position).getBackground_music());<br>                EventBus.getDefault().post(new MyEvent(“null”));<br>            } else {<br>                EventBus.getDefault().post(new MyEvent(“/storage/emulated/legacy/res/common/sound/“ + mScenes.get(position).getBackground_music()));<br>                Log.e(“bmg”, “/storage/emulated/legacy/res/common/sound/“ + mScenes.get(position).getBackground_music());</p>
+<pre><code>}`
+</code></pre></span>
         
       
     </div>
@@ -607,7 +729,7 @@
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>
