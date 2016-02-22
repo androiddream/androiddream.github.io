@@ -35,20 +35,25 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="国内的某个姓名软件，有注册版和普通版">
+<meta name="description" content="李新阳的简历">
 <meta property="og:type" content="article">
-<meta property="og:title" content="逆向分析某apk">
-<meta property="og:url" content="http://lixinyang.org/2013/12/21/逆向分析某apk/index.html">
+<meta property="og:title" content="myresume">
+<meta property="og:url" content="http://lixinyang.org/1994/01/19/myresume/index.html">
 <meta property="og:site_name" content="lixinyang">
-<meta property="og:description" content="国内的某个姓名软件，有注册版和普通版">
-<meta property="og:image" content="http://www.eoeandroid.com/data/attachment/forum/201312/21/095035lihe1zfiqq5ficlp.png">
-<meta property="og:image" content="http://www.eoeandroid.com/data/attachment/forum/201312/21/095105m3mymb7v3xy73bmm.png">
-<meta property="og:image" content="http://a1.eoeandroid.com/attachment/forum/201312/21/095210kydojr9jdovo0z2b.png">
-<meta property="og:image" content="http://a1.eoeandroid.com/attachment/forum/201312/21/095314l1x6xhy3yl1hx23b.png">
-<meta property="og:updated_time" content="2015-02-20T10:52:33.000Z">
+<meta property="og:description" content="李新阳的简历">
+<meta property="og:image" content="http://p16.qhimg.com/dm/173_300_/t014532756736ffb9d5.png">
+<meta property="og:image" content="http://p19.qhimg.com/dm/173_300_/t01bf1f89cad35bd62c.png">
+<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2016-02-22-11-27-06.png">
+<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2016-02-22-11-29-29.png">
+<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2016-02-22-11-27-15.png">
+<meta property="og:image" content="http://img.wdjimg.com/mms/screenshot/9/72/948c07c10fdaa332e96aa87600484729_200_334.jpeg">
+<meta property="og:image" content="http://img.wdjimg.com/mms/screenshot/5/61/3ab979bd83e7bf67f3f35858a467b615_200_334.jpeg">
+<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2016-02-22-11-26-36.png">
+<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/android.gif">
+<meta property="og:updated_time" content="2016-02-22T06:44:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="逆向分析某apk">
-<meta name="twitter:description" content="国内的某个姓名软件，有注册版和普通版">
+<meta name="twitter:title" content="myresume">
+<meta name="twitter:description" content="李新阳的简历">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -58,7 +63,7 @@
   };
 </script>
 
-  <title> 逆向分析某apk | lixinyang </title>
+  <title> myresume | lixinyang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -157,7 +162,7 @@
           
           
             
-              逆向分析某apk
+              myresume
             
           
         </h1>
@@ -166,8 +171,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2013-12-21T21:08:42+08:00" content="Dec 21 2013">
-            Dec 21 2013
+          <time itemprop="dateCreated" datetime="1994-01-19T14:43:47+08:00" content="Jan 19 1994">
+            Jan 19 1994
           </time>
         </span>
 
@@ -177,8 +182,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2013/12/21/逆向分析某apk/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/12/21/逆向分析某apk/" itemprop="commentsCount"></span>
+            <a href="/1994/01/19/myresume/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="1994/01/19/myresume/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -192,18 +197,65 @@
       
 
       
-        <span itemprop="articleBody"><p>国内的某个姓名软件，有注册版和普通版</p>
-<p> <img src="http://www.eoeandroid.com/data/attachment/forum/201312/21/095035lihe1zfiqq5ficlp.png" alt="image"><br> <a id="more"></a></p>
-<p>做下准备工作，用APKTOOL反编译该APK程序，并用dex2jar工具将classes文件转化成jar文件</p>
-<p>先来观察AndroidManifest.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;manifest android:versionCode=&#8221;3&#8243; android:versionName=&#8221;3.0&#8243; package=&#8221;My.XuanAo.Name&#8221;&#10;xmlns:android=&#8221;http://schemas.android.com/apk/res/android&#8221;&#62;&#10;&#60;application android:label=&#8221;@string/app_name&#8221; android:icon=&#8221;@drawable/icon&#8221;android:debuggable=&#8221;true&#8221;&#62;&#10;&#60;activity android:label=&#8221;@string/app_name&#8221; android:name=&#8221;.main&#8221;android:screenOrientation=&#8221;portrait&#8221;&#62;&#10;&#60;intent-filter&#62;&#10;&#60;action android:name=&#8221;android.intent.action.MAIN&#8221;/&#62;&#10;&#60;category android:name=&#8221;android.intent.category.LAUNCHER&#8221;/&#62;&#10;&#60;/intent-filter&#62;&#10;&#60;/activity&#62;&#10;&#60;activity android:name=&#8221;.InputDlg&#8221; /&#62;&#10;&#60;activity android:name=&#8221;.SetDlg&#8221; /&#62;&#10;&#60;activity android:name=&#8221;.InputPassDlg&#8221; /&#62;&#10;&#60;activity android:name=&#8221;.InGongSi&#8221; /&#62;&#10;&#60;activity android:name=&#8221;.NameSetDlg&#8221; /&#62;&#10;&#60;activity android:name=&#8221;.WordBookDlg&#8221; /&#62;&#10;&#60;activity android:name=&#8221;.BjxDlg&#8221; /&#62;&#10;&#60;activity android:name=&#8221;.SoftRegDlg&#8221; /&#62;&#10;&#60;activity android:name=&#8221;.SoftHelpDlg&#8221; /&#62;</span><br></pre></td></tr></table></figure></p>
-<p>核心Activity是My.XuanAo.Name.main，还有这个  <activity android:name="”.SoftRegDlg”/">有点可疑先记下来，可能是关于注册信息的吧</activity></p>
-<p>jd-gui打开jar包，用dex2jar转换的，先看看核心activity，出来了个内部错误<br><img src="http://www.eoeandroid.com/data/attachment/forum/201312/21/095105m3mymb7v3xy73bmm.png" alt="image"></p>
-<p>算了，再来看看其他SoftRegDlg里面竟然有好多敏感信息的源码<br><figure class="highlight"><figcaption><span>My.XuanAo.Name;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import android.app.Activity;&#10;import android.content.Intent;&#10;import android.content.SharedPreferences;&#10;import android.os.Bundle;&#10;import android.text.Editable;&#10;import android.view.View;&#10;import android.view.View.OnClickListener;&#10;import android.widget.Button;&#10;import android.widget.EditText;&#10;import android.widget.TextView;&#10;import android.widget.Toast;&#10;public class SoftRegDlg extends Activity&#10;implements View.OnClickListener&#10;&#123;&#10;private Button BtoClose;&#10;private Button BtoOk;&#10;private EditText EdtReg;&#10;private EditText EdtSer;&#10;private boolean m_bFlag;&#10;  privatevoid UiSetTextSize()&#10;  &#123;&#10;   int i = getSharedPreferences(&#34;xa_name&#34;,0).getInt(&#34;uisize&#34;, 5);&#10;   if (i == 5)&#10;     return;&#10;   TextView localTextView1 = (TextView)findViewById(2131099742);&#10;   TextView localTextView2 = (TextView)findViewById(2131099744);&#10;   localTextView1.setTextSize(i);&#10;   localTextView2.setTextSize(i);&#10;   this.BtoOk.setTextSize(i);&#10;   this.BtoClose.setTextSize(i);&#10;   this.EdtSer.setTextSize(i);&#10;   this.EdtReg.setTextSize(i);&#10;  &#125;&#10;public void onClick(View paramView)&#10;  &#123;&#10;    if(paramView == this.BtoClose)&#10;    &#123;&#10;     setResult(0);&#10;     finish();&#10;    &#125;&#10;   if (paramView == this.BtoOk)&#10;    &#123;&#10;     if (this.m_bFlag)&#10;     &#123;&#10;       setResult(0);&#10;       finish();&#10;     &#125;&#10;    &#125;&#10;   else&#10;     return;&#10;   String str = this.EdtReg.getText().toString().trim();&#10;   if (str.length() == 15)&#10;     for (int i = 0; ; i++)&#10;     &#123;&#10;       if (i &#62;= 15)&#10;       &#123;&#10;         main.m_chkSoft.Fregcode = str;&#10;         if ((main.m_chkSoft.ChkNumA()) &#38;&#38; (main.m_chkSoft.ChkNumB())&#38;&#38; (main.m_chkSoft.ChkNumC()))&#10;         &#123;&#10;           main.m_chkSoft.WriteRegCode(str);&#10;           this.m_bFlag = true;&#10;         &#125;&#10;         Intent localIntent = getIntent();&#10;         localIntent.putExtra(&#34;reg&#34;, this.m_bFlag);&#10;         setResult(104, localIntent);&#10;          finish();&#10;         return;&#10;       &#125;&#10;       if ((str.charAt(i) &#60; &#39;0&#39;) || (str.charAt(i) &#62; &#39;9&#39;))&#10;       &#123;&#10;         Toast.makeText(this, &#34;&#35831;&#36755;&#20837;&#25968;&#23383;&#12290;&#34;, 1).show();&#10;         return;&#10;       &#125;&#10;     &#125;&#10;   Toast.makeText(this, &#34;&#35831;&#36755;&#20837;&#27880;&#20876;&#21495;&#12290;&#34;, 1).show();&#10;  &#125;&#10;public void onCreate(Bundle paramBundle)&#10;  &#123;&#10;   super.onCreate(paramBundle);&#10;   setContentView(2130903048);&#10;   this.m_bFlag = getIntent().getBooleanExtra(&#34;reg&#34;, false);&#10;   this.BtoOk = ((Button)findViewById(2131099746));&#10;   this.BtoClose = ((Button)findViewById(2131099747));&#10;   this.EdtSer = ((EditText)findViewById(2131099743));&#10;   this.EdtReg = ((EditText)findViewById(2131099745));&#10;   this.BtoOk.setOnClickListener(this);&#10;   this.BtoClose.setOnClickListener(this);&#10;   if (this.m_bFlag)&#10;    &#123;&#10;     this.EdtSer.setText(&#34;&#24050;&#27880;&#20876;&#34;);&#10;     this.EdtReg.setText(&#34;&#24050;&#27880;&#20876;&#34;);&#10;    &#125;&#10;   while (true)&#10;    &#123;&#10;     UiSetTextSize();&#10;     return;&#10;     this.EdtSer.setText(main.m_chkSoft.Fsoftsn);&#10;     this.EdtReg.setText(&#34;&#34;);&#10;    &#125;&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>除了核心activity都逆向出来了源码太危险了，差不多都可以仿照写一个了，上面主要有个判断if((main.m_chkSoft.ChkNumA()) &amp;&amp; (main.m_chkSoft.ChkNumB()) &amp;&amp;(main.m_chkSoft.ChkNumC()))，ChkNumA()，ChkNumB()和ChkNumC()条件都满足是就为已经注册，这三个应该是主程序的算法，随便贴一个ChkNumA()看看<br><figure class="highlight"><figcaption><span>boolean ChkNumA()</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#10; long l1 = 0L;&#10; char[] arrayOfChar = new char[6];&#10; if ((this.Fregcode.length() != 15) || (this.Fsoftsn.length() != 12))&#10;   return false;&#10; long l2 = 10000L;&#10; int i = 1;&#10; do&#10;  &#123;&#10;   l1 += l2 * (&#39;&#65488;&#39; + this.Fregcode.charAt(i - 1));&#10;   i++;&#10;   l2 /= 10L;&#10;  &#125;&#10; while (l2 &#62; 0L);&#10; String str = String.valueOf((1265L + (l1 ^ SnCal(1265L))) / 3L -1265L).trim();&#10; long l3 = str.length();&#10; str.getChars(0, (int)l3, arrayOfChar, 0);&#10; long l4;&#10; int k;&#10; int m;&#10; if (l3 &#60; 4L)&#10;  &#123;&#10;   l4 = 4L - l3;&#10;   k = (int)(l3 - 1L);&#10;   if (k &#62;= 0)&#10;     break label179;&#10;   m = 0;&#10;   label160: if (m &#60; (int)l4)&#10;     break label198;&#10;  &#125;&#10; for (int j = 1; ; j++)&#10;  &#123;&#10;   if (j &#62; 4)&#10;   &#123;&#10;     return true;&#10;     label179: arrayOfChar[((int)(l4 + k))] = arrayOfChar[k];&#10;     k--;&#10;     break;&#10;     label198: arrayOfChar[m] = &#39;0&#39;;&#10;     m++;&#10;     break label160;&#10;   &#125;&#10;   if (arrayOfChar[(j - 1)] != this.Fsoftsn.charAt(j - 1))&#10;     return false;&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>主要看他有一个返回值是要和另外两个方法比较的，如果让他们返回的值相同那么就可能达到注册了的效果，在这个CSoftReg类里面还看到了文件操作方法<br>取出信息比较<br><img src="http://a1.eoeandroid.com/attachment/forum/201312/21/095210kydojr9jdovo0z2b.png" alt="image"><br>apktool打开定位到ChkNumA()<br><figure class="highlight"><figcaption><span>virtual methods</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.method public ChkNumA()Z&#10;    .locals 14&#10;    .prologue&#10;    .line 256&#10;    const-wide/16 v0, 0x4f1&#10;    .line 257&#10;    .local v0, DW1:J&#10;    const-wide/16 v9, 0x0&#10;    .line 258&#10;    .local v9, tol:J&#10;    const/4 v11, 0x6&#10;    new-array v2, v11, [C&#10;    .line 260&#10;    .local v2, cnum:[C&#10;    const-string v4, &#34;&#34;&#10;    .line 262&#10;    .local v4, stmp:Ljava/lang/String;&#10;    iget-object v11, p0, LMy/XuanAo/Name/CSoftReg;-&#62;Fregcode:Ljava/lang/String;&#10;    invoke-virtual &#123;v11&#125;, Ljava/lang/String;-&#62;length()I&#10;    move-result v11&#10;    const/16 v12, 0xf&#10;    if-ne v11, v12, :cond_0&#10;    iget-object v11, p0, LMy/XuanAo/Name/CSoftReg;-&#62;Fsoftsn:Ljava/lang/String;&#10;    invoke-virtual &#123;v11&#125;, Ljava/lang/String;-&#62;length()I&#10;    move-result v11&#10;    const/16 v12, 0xc&#10;    if-eq v11, v12, :cond_1&#10;    :cond_0&#10;    const/4 v11, 0x0   &#36820;&#22238;&#20026;&#20551;&#10;    .line 288&#10;    :goto_0&#10;    return v11 &#36825;&#21477;&#24456;&#20851;&#38190;&#20195;&#34920;ChkNumA()&#30340;&#36820;&#22238;&#20869;&#23481;&#10;    .line 263&#10;    :cond_1&#10;    const-wide/16 v5, 0x2710&#10;    .local v5, t1:J&#10;    const/4 v3, 0x1</span><br></pre></td></tr></table></figure></p>
-<pre><code>return v11 这句很关键代表<span class="function"><span class="title">ChkNumA</span><span class="params">()</span></span>的返回内容，可以在这句前定义条赋值指令，让v11返回值为真，然后其他两个函数的返回值也一样
-</code></pre><p>比如const/4 v11, 0x1<br>ChkNumB()也类似<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">method public ChkNumB()Z&#10;    .locals 14&#10;    .prologue&#10;    .line 293&#10;    const-wide/16 v0, 0x805&#10;    .line 294&#10;    .local v0, DW1:J&#10;    const-wide/16 v9, 0x0&#10;    .line 295&#10;    .local v9, tol:J&#10;    const/4 v11, 0x6&#10;    new-array v2, v11, [C&#10;    .line 297&#10;    .local v2, cnum:[C&#10;    const-string v4, &#34;&#34;&#10;    .line 299&#10;    .local v4, stmp:Ljava/lang/String;&#10;    iget-object v11, p0, LMy/XuanAo/Name/CSoftReg;-&#62;Fregcode:Ljava/lang/String;&#10;    invoke-virtual &#123;v11&#125;, Ljava/lang/String;-&#62;length()I&#10;    move-result v11&#10;    const/16 v12, 0xf&#10;    if-ne v11, v12, :cond_0&#10;    iget-object v11, p0, LMy/XuanAo/Name/CSoftReg;-&#62;Fsoftsn:Ljava/lang/String;&#10;    invoke-virtual &#123;v11&#125;, Ljava/lang/String;-&#62;length()I&#10;    move-result v11&#10;    const/16 v12, 0xc&#10;    if-eq v11, v12, :cond_1&#10;    :cond_0&#10;    const/4 v11, 0x0&#10;    .line 326&#10;    :goto_0&#10;    return v11  &#23601;&#26159;&#36825;&#21477;&#65292;&#36820;&#22238;&#20540;&#10;    .line 300&#10;    :cond_1&#10;    const-wide/16 v5, 0x2710&#10;    .local v5, t1:J&#10;    const/4 v3, 0x6</span><br></pre></td></tr></table></figure></p>
-<p>  return v11  就是这句，返回值，同样在前面定义相同的赋值句使返回值为真<br>const/4 v11, 0x1<br>ChkNumC()也是这样然后保存编译就得到了注册版，<img src="http://a1.eoeandroid.com/attachment/forum/201312/21/095314l1x6xhy3yl1hx23b.png" alt="image"><br>  源软件附上<a href="http://pan.baidu.com/s/1mgmL7VM" target="_blank" rel="external">http://pan.baidu.com/s/1mgmL7VM</a><br>  原本想探索下android加壳方案，看了下csdn上的博客，感觉自己功力不够然后期末考试又多实在是好蛋疼钓丝还是继续潜水吧</p>
+        <span itemprop="articleBody"><h1 id="李新阳的简历">李新阳的简历</h1><a id="more"></a>
+<h1 id="联系方式">联系方式</h1><ul>
+<li>手机：18314527051 （<code>anytime</code>）</li>
+<li>Email：winphonedream@gmail.com （<code>备用 blankfragment@icloud.com</code>）</li>
+<li>QQ/微信号：245010735（<code>QQ</code>）</li>
+</ul>
+<hr>
+<h1 id="个人信息">个人信息</h1><ul>
+<li>李新阳/男/1994 </li>
+<li>专科/昆明冶金高等专科学校计算机学院软件技术专业 </li>
+<li>工作年限：12个月</li>
+<li>微博：<a href="http://weibo.com/androiddream" target="_blank" rel="external">@李新阳</a> </li>
+<li>技术博客：<a href="http://lixinyang.org">http://lixinyang.org</a> </li>
+<li><p>GitHub: <a href="http://github.com/androiddream" target="_blank" rel="external">http://github.com/androiddream</a> ( <code>有原创repo</code>  )</p>
+</li>
+<li><p>期望职位：产品经理( <code>android,ios方向方向</code>  )</p>
+</li>
+<li>期望薪资：税前月薪8k</li>
+<li>期望城市：昆明</li>
+</ul>
+<hr>
+<h1 id="工作经历">工作经历</h1><p>（工作经历按逆序排列，最新的在最前边，按公司做一级分组，公司内按二级分组）</p>
+<h2 id="云南簇慧科技有限公司_（_2014年12月_~_2015年9月_）">云南簇慧科技有限公司 （ 2014年12月 ~ 2015年9月 ）</h2><h3 id="簇慧车行app">簇慧车行app</h3><p>我在此项目负责了UI架构和主要业务逻辑，这个项目中，我最困难的问题是android解析dataset数组，因为这种不是普通的xml数据接口，我采取了soap协议分段解析，最后成功解析出数据。这个项目中，我最自豪的技术细节是采用异步解析的方式将解析结果发送到主线程来更新UI，因为子线程不能更新ui而耗时任务又不能放在主线程引起阻塞。<br>app地址：<a href="http://zhushou.360.cn/detail/index/soft_id/2967090?recrefer=SE_D_簇慧" target="_blank" rel="external">http://zhushou.360.cn/detail/index/soft_id/2967090?recrefer=SE_D_簇慧</a><br><img src="http://p16.qhimg.com/dm/173_300_/t014532756736ffb9d5.png" alt="image"><br><img src="http://p19.qhimg.com/dm/173_300_/t01bf1f89cad35bd62c.png" alt="image"><br>这是app的运行视频，因为后来公司业务调整接口改动，所以app没能更新，所以现在app部分功能不能用<br><a href="http://v.youku.com/v_show/id_XOTQwMTMxNzIw.html?firsttime=0&amp;from=y1.4-2" target="_blank" rel="external">http://v.youku.com/v_show/id_XOTQwMTMxNzIw.html?firsttime=0&amp;from=y1.4-2</a></p>
+<h3 id="云南经济管理学校人事系统接口编写">云南经济管理学校人事系统接口编写</h3><p>地址：<a href="https://github.com/androiddream/jgssointerface" target="_blank" rel="external">https://github.com/androiddream/jgssointerface</a><br>1.人事系统单点登录接口编写和cas统一认证平台对接<br>通过cas系统获取username用户名，连接数据库获取对应用户名的密码，提交表单到人事系统的logoservice， 人事系统完成认证，跳转到人事系统个人中心页面。</p>
+<p>2.tomcat配置flag值和环境配置<br>配置文件中增加人事系统各个版本flag值，增加数据库驱动文件。</p>
+<p>3.集成到经管学校cas页面(人事系统)<br>统一认证平台页面增加接口页面，cas认证通过后点击人事系统直接跳转到人事系统页面。</p>
+<h2 id="昆明诺戈信息技术有限公司（ice_queen_media）_（_2015年9月_~_2016年2月_）">昆明诺戈信息技术有限公司（ice queen media） （ 2015年9月 ~ 2016年2月 ）</h2><h3 id="icq系列项目android版">icq系列项目android版</h3><p>我在此项目负责了UI架构和主要业务逻辑，这个项目中，我最困难的问题是android Google play的内购还有jni的调用还有bug的解决；在此期间也也学习到了好多项目管理知识，用户行为跟踪活跃度调查，例如flurry，fabric，崩溃分析解决，bug反馈（mantis还有bugtags），版本迭代，代码管理（我们用的是git）<br><img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2016-02-22-11-27-06.png" alt="image"><br><img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2016-02-22-11-29-29.png" alt="image"><br><img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2016-02-22-11-27-15.png" alt="image"></p>
+<p>app地址需要翻墙：<a href="https://play.google.com/store/apps/developer?id=Ice+Queen+Media" target="_blank" rel="external">https://play.google.com/store/apps/developer?id=Ice+Queen+Media</a><br>项目有对应ios版，<a href="https://itunes.apple.com/cn/developer/ice-queen-media/id1068142610" target="_blank" rel="external">https://itunes.apple.com/cn/developer/ice-queen-media/id1068142610</a></p>
+<h3 id="其他项目">其他项目</h3><p>大学时候用环信接口做的app项目，豌豆荚100多下载量，地址<a href="http://www.wandoujia.com/apps/com.lixinyang.yejing" target="_blank" rel="external">http://www.wandoujia.com/apps/com.lixinyang.yejing</a><br><img src="http://img.wdjimg.com/mms/screenshot/9/72/948c07c10fdaa332e96aa87600484729_200_334.jpeg" alt="image"><br><img src="http://img.wdjimg.com/mms/screenshot/5/61/3ab979bd83e7bf67f3f35858a467b615_200_334.jpeg" alt="image"></p>
+<p>还做过一个山洪预警系统，主要功能点就是基于soap协议上传图片，视频，消息推送，推送消息历时查询<br><img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2016-02-22-11-26-36.png" alt="image"></p>
+<h1 id="开源项目和作品">开源项目和作品</h1><h2 id="开源项目">开源项目</h2><p>android滑动banner的实现<br><img src="http://7vzq44.com1.z0.glb.clouddn.com/android.gif" alt="image"><br><a href="https://github.com/androiddream/AndroidBanner_demo" target="_blank" rel="external">https://github.com/androiddream/AndroidBanner_demo</a><br>主要在<a href="https://github.com/androiddream，有过一些协作和贡献" target="_blank" rel="external">https://github.com/androiddream，有过一些协作和贡献</a></p>
+<h2 id="技术文章">技术文章</h2><p><a href="http://lixinyang.org/2015/04/20/android解析dataset/">http://lixinyang.org/2015/04/20/android解析dataset/</a><br><a href="http://lixinyang.org/2014/07/26/Android进程间通讯/">http://lixinyang.org/2014/07/26/Android进程间通讯/</a></p>
+<h2 id="演讲和讲义">演讲和讲义</h2><p>主要去云南大学参加比赛的时候讲了一些app ui设计架构，material design 和android design发展</p>
+<h1 id="技能清单">技能清单</h1><p>（我一般主张将技能清单写入到工作经历里边去。不过很难完整，所以有这么一段也不错）</p>
+<p>以下均为我熟练使用的技能</p>
+<ul>
+<li>Axure(不太熟)</li>
+<li>android开发：java</li>
+<li>开发工具：android studio/eclipse</li>
+<li>数据库相关：SQLite</li>
+<li>版本管理、文档和自动化部署工具：Svn/Git/PHPDoc/Phing/Composer</li>
+<li>单元测试：PHPUnit/SimpleTest/Qunit</li>
+<li>云和开放平台：SAE/BAE/AWS/微博开放平台/友盟</li>
+</ul>
+<h2 id="参考技能关键字">参考技能关键字</h2><ul>
+<li>android(1830)</li>
+<li>java(386)</li>
+<li>ui(180)</li>
+<li>app(178)</li>
+<li>http(149)</li>
+<li>sdk(135)</li>
+<li>api(60)</li>
+<li>xml(48)</li>
+<li>eclipse(41)</li>
+<li>json(28)</li>
+<li>sqlite(26)</li>
+</ul>
+<hr>
+<h1 id="致谢">致谢</h1><p>感谢您花时间阅读我的简历，期待能有机会和您共事。</p>
 </span>
       
     </div>
@@ -215,13 +267,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/04/04/下拉刷新初体验之一-XListView/" rel="prev">下拉刷新初体验之一  XListView</a>
+              <a href="/1994/01/19/hello-world/" rel="prev">Hello World</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
-            
-              <a href="/2013/11/27/Android与windows软件安全基础/" rel="next">Android与windows软件安全基础</a>
             
           </div>
         </div>
@@ -347,7 +397,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#李新阳的简历"><span class="nav-number">1.</span> <span class="nav-text">李新阳的简历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#联系方式"><span class="nav-number">2.</span> <span class="nav-text">联系方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#个人信息"><span class="nav-number">3.</span> <span class="nav-text">个人信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工作经历"><span class="nav-number">4.</span> <span class="nav-text">工作经历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#云南簇慧科技有限公司_（_2014年12月_~_2015年9月_）"><span class="nav-number">4.1.</span> <span class="nav-text">云南簇慧科技有限公司 （ 2014年12月 ~ 2015年9月 ）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#簇慧车行app"><span class="nav-number">4.1.1.</span> <span class="nav-text">簇慧车行app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#云南经济管理学校人事系统接口编写"><span class="nav-number">4.1.2.</span> <span class="nav-text">云南经济管理学校人事系统接口编写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#昆明诺戈信息技术有限公司（ice_queen_media）_（_2015年9月_~_2016年2月_）"><span class="nav-number">4.2.</span> <span class="nav-text">昆明诺戈信息技术有限公司（ice queen media） （ 2015年9月 ~ 2016年2月 ）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#icq系列项目android版"><span class="nav-number">4.2.1.</span> <span class="nav-text">icq系列项目android版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他项目"><span class="nav-number">4.2.2.</span> <span class="nav-text">其他项目</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开源项目和作品"><span class="nav-number">5.</span> <span class="nav-text">开源项目和作品</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开源项目"><span class="nav-number">5.1.</span> <span class="nav-text">开源项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术文章"><span class="nav-number">5.2.</span> <span class="nav-text">技术文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#演讲和讲义"><span class="nav-number">5.3.</span> <span class="nav-text">演讲和讲义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技能清单"><span class="nav-number">6.</span> <span class="nav-text">技能清单</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考技能关键字"><span class="nav-number">6.1.</span> <span class="nav-text">参考技能关键字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#致谢"><span class="nav-number">7.</span> <span class="nav-text">致谢</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -401,9 +451,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'lixinyang';
-      var disqus_identifier = '2013/12/21/逆向分析某apk/';
-      var disqus_title = '逆向分析某apk';
-      var disqus_url = 'http://lixinyang.org/2013/12/21/逆向分析某apk/';
+      var disqus_identifier = '1994/01/19/myresume/';
+      var disqus_title = 'myresume';
+      var disqus_url = 'http://lixinyang.org/1994/01/19/myresume/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

@@ -41,7 +41,7 @@
 <meta property="og:url" content="http://lixinyang.org/2016/01/03/vn001项目总结/index.html">
 <meta property="og:site_name" content="lixinyang">
 <meta property="og:description" content="网络请求Volley（Post&amp;amp;Get）">
-<meta property="og:updated_time" content="2016-01-03T08:21:32.000Z">
+<meta property="og:updated_time" content="2016-01-16T03:16:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vn001项目总结">
 <meta name="twitter:description" content="网络请求Volley（Post&amp;amp;Get）">
@@ -189,44 +189,49 @@
 
       
         <span itemprop="articleBody"><h3 id="网络请求">网络请求</h3><p>Volley（Post&amp;Get）<br><a id="more"></a><br>sample code：</p>
-<p><code>public class CustomRequest extends Request&lt;JSONObject&gt; {
-    private Listener&lt;JSONObject&gt; listener;
-    private Map&lt;String, String&gt; params;
-    public CustomRequest(String url, Map&lt;String, String&gt; params,
-            Listener&lt;JSONObject&gt; reponseListener, ErrorListener errorListener) {
-        super(Method.GET, url, errorListener);
-        this.listener = reponseListener;
-        this.params = params;
+<p>`public class CustomRequest extends Request<jsonobject> {</jsonobject></p>
+<pre><code><span class="keyword">private</span> Listener&lt;<span class="keyword">JSONObject</span>&gt; listener;
+<span class="keyword">private</span> Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; params;
+
+<span class="keyword">public</span> CustomRequest(<span class="keyword">String</span> url, Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; params,
+        Listener&lt;<span class="keyword">JSONObject</span>&gt; reponseListener, ErrorListener errorListener) {
+    <span class="keyword">super</span>(Method.GET, url, errorListener);
+    <span class="keyword">this</span>.listener = reponseListener;
+    <span class="keyword">this</span>.params = params;
+}
+
+<span class="keyword">public</span> CustomRequest(<span class="built_in">int</span> method, <span class="keyword">String</span> url, Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; params,
+        Listener&lt;<span class="keyword">JSONObject</span>&gt; reponseListener, ErrorListener errorListener) {
+    <span class="keyword">super</span>(method, url, errorListener);
+    <span class="keyword">this</span>.listener = reponseListener;
+    <span class="keyword">this</span>.params = params;
+}
+
+<span class="keyword">protected</span> Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; getParams()
+        <span class="keyword">throws</span> com.android.volley.AuthFailureError {
+    <span class="keyword">return</span> params;
+};
+
+@Override
+<span class="keyword">protected</span> Response&lt;<span class="keyword">JSONObject</span>&gt; parseNetworkResponse(NetworkResponse response) {
+    <span class="keyword">try</span> {
+        <span class="keyword">String</span> jsonString = <span class="keyword">new</span> <span class="keyword">String</span>(response.data,
+                HttpHeaderParser.parseCharset(response.headers));
+        <span class="keyword">return</span> Response.success(<span class="keyword">new</span> <span class="keyword">JSONObject</span>(jsonString),
+                HttpHeaderParser.parseCacheHeaders(response));
+    } <span class="keyword">catch</span> (UnsupportedEncodingException e) {
+        <span class="keyword">return</span> Response.error(<span class="keyword">new</span> ParseError(e));
+    } <span class="keyword">catch</span> (JSONException je) {
+        <span class="keyword">return</span> Response.error(<span class="keyword">new</span> ParseError(je));
     }
-    public CustomRequest(int method, String url, Map&lt;String, String&gt; params,
-            Listener&lt;JSONObject&gt; reponseListener, ErrorListener errorListener) {
-        super(method, url, errorListener);
-        this.listener = reponseListener;
-        this.params = params;
-    }
-    protected Map&lt;String, String&gt; getParams()
-            throws com.android.volley.AuthFailureError {
-        return params;
-    };
-    @Override
-    protected Response&lt;JSONObject&gt; parseNetworkResponse(NetworkResponse response) {
-        try {
-            String jsonString = new String(response.data,
-                    HttpHeaderParser.parseCharset(response.headers));
-            return Response.success(new JSONObject(jsonString),
-                    HttpHeaderParser.parseCacheHeaders(response));
-        } catch (UnsupportedEncodingException e) {
-            return Response.error(new ParseError(e));
-        } catch (JSONException je) {
-            return Response.error(new ParseError(je));
-        }
-    }
-    @Override
-    protected void deliverResponse(JSONObject response) {
-        // TODO Auto-generated method stub
-        listener.onResponse(response);
-    }
-}</code></p>
+}
+
+@Override
+<span class="keyword">protected</span> <span class="keyword">void</span> deliverResponse(<span class="keyword">JSONObject</span> response) {
+    <span class="comment">// <span class="doctag">TODO</span> Auto-generated method stub</span>
+    listener.onResponse(response);
+}
+</code></pre><p>}`</p>
 <p><code>RequestQueue queue = Volley.newRequestQueue(this);
         CustomRequest chapterecordRequest = new CustomRequest()
         queue.add(chapterecordRequest)</code></p>
@@ -249,36 +254,44 @@
 
     &gt;
        &lt;/com<span class="class">.android</span><span class="class">.volley</span><span class="class">.toolbox</span><span class="class">.NetworkImageView</span>&gt;
-</code></pre><p>自定义BitmapCache<br><code>public class BitmapCache implements ImageCache {
-    private static final String TAG = &quot;BitmapCache&quot;;
-    private LruCache&lt;String, Bitmap&gt; mCache;
-    public BitmapCache() {
-        int maxSize = 4 * 1024 * 1024;
-        mCache = new LruCache&lt;String, Bitmap&gt;(maxSize) {
-            @Override
-            protected int sizeOf(String key, Bitmap bitmap) {
-                return bitmap.getRowBytes() * bitmap.getHeight();
-            }
-        };
-    }
-    @Override
-    public Bitmap getBitmap(String url) {
-        Log.i(TAG, &quot;get cache &quot; + url);
-        return mCache.get(url);
-    }
-    @Override
-    public void putBitmap(String url, Bitmap bitmap) {
-        Log.i(TAG, &quot;get cache: &quot; + url);
-        if (bitmap != null) {
-            mCache.put(url, bitmap);
+</code></pre><p>自定义BitmapCache<br>`public class BitmapCache implements ImageCache {</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"BitmapCache"</span>;
+<span class="keyword">private</span> LruCache&lt;String, Bitmap&gt; mCache;
+
+<span class="function"><span class="keyword">public</span> <span class="title">BitmapCache</span><span class="params">()</span> </span>{
+
+    <span class="keyword">int</span> maxSize = <span class="number">4</span> * <span class="number">1024</span> * <span class="number">1024</span>;
+
+    mCache = <span class="keyword">new</span> LruCache&lt;String, Bitmap&gt;(maxSize) {
+        <span class="annotation">@Override</span>
+        <span class="keyword">protected</span> <span class="function"><span class="keyword">int</span> <span class="title">sizeOf</span><span class="params">(String key, Bitmap bitmap)</span> </span>{
+
+            <span class="keyword">return</span> bitmap.getRowBytes() * bitmap.getHeight();
         }
+
+    };
+
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">Bitmap <span class="title">getBitmap</span><span class="params">(String url)</span> </span>{
+
+    Log.i(TAG, <span class="string">"get cache "</span> + url);
+
+    <span class="function"><span class="keyword">return</span> mCache.<span class="title">get</span><span class="params">(url)</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">putBitmap</span><span class="params">(String url, Bitmap bitmap)</span> </span>{
+    Log.i(TAG, <span class="string">"get cache: "</span> + url);
+    <span class="keyword">if</span> (bitmap != <span class="keyword">null</span>) {
+
+        mCache.put(url, bitmap);
+
     }
-}</code></p>
-<p>使用示例<br><code>mQueue = Volley.newRequestQueue(getActivity());
-        final ImageLoader imageLoader = new ImageLoader(mQueue, new BitmapCache());
-        imgviewnetwork.setDefaultImageResId(R.drawable.default);
-        imgviewnetwork.setErrorImageResId(R.drawable.error);
-        imgviewnetwork.setImageUrl(imgurl, imageLoader);</code></p>
+
+}
+</code></pre><p>}<br><code>使用示例</code> mQueue = Volley.newRequestQueue(getActivity());<br>        final ImageLoader imageLoader = new ImageLoader(mQueue, new BitmapCache());<br>        imgviewnetwork.setDefaultImageResId(R.drawable.default);<br>        imgviewnetwork.setErrorImageResId(R.drawable.error);<br>        imgviewnetwork.setImageUrl(imgurl, imageLoader); `</p>
 <p>推荐的其他库<br>Glide<br><a href="https://github.com/bumptech/glide" target="_blank" rel="external">https://github.com/bumptech/glide</a></p>
 <p>Picasso<br><a href="http://square.github.io/picasso/" target="_blank" rel="external">http://square.github.io/picasso/</a></p>
 <p>fresco<br><a href="https://github.com/facebook/fresco" target="_blank" rel="external">https://github.com/facebook/fresco</a></p>
@@ -365,7 +378,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
