@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="android," />
+  <meta name="keywords" content="Hexo,next" />
 
 
 
@@ -35,22 +35,16 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="首先说几种去广告的方法
-1.    反编译apk软件，直接修改显示广告的部分，然后保存重新编译下2.    Java hook，就如金山毒霸，lbe安全大师之类的，我也在csdn的博客上看过大牛分析3.    修改host文件，更改广告域名指向的指向，指向为本地">
+<meta name="description" content="标题 上周遇到一个问题，在新公司新建android studio项目的时候，我新建一个带Navigation Drawer的Activity，然后findviewbyid拿nav_header_main.xml(这个布局文件是包含在main.xml里的)里面的Textview不能拿到，报了空指针，后来换个写法 View header=getLayoutInflater().from(this).i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="去除app广告">
-<meta property="og:url" content="http://lixinyang.org/2014/06/30/去除app广告/index.html">
+<meta property="og:title" content="com.android.support:design:23.2.0的一个bug">
+<meta property="og:url" content="http://lixinyang.org/2016/03/12/com-android-support-design-23-2-0的一个bug/index.html">
 <meta property="og:site_name" content="lixinyang">
-<meta property="og:description" content="首先说几种去广告的方法
-1.    反编译apk软件，直接修改显示广告的部分，然后保存重新编译下2.    Java hook，就如金山毒霸，lbe安全大师之类的，我也在csdn的博客上看过大牛分析3.    修改host文件，更改广告域名指向的指向，指向为本地">
-<meta property="og:image" content="http://www.eoeandroid.com/data/attachment/album/201405/14/164630rylgmzewor4eez25.png">
-<meta property="og:image" content="http://www.eoeandroid.com/data/attachment/album/201405/14/164648ocoyyck9jj1e9ofo.png">
-<meta property="og:image" content="http://www.eoeandroid.com/data/attachment/album/201405/14/164935lu4s744ui4i5t1p3.png">
-<meta property="og:updated_time" content="2015-02-20T11:18:42.000Z">
+<meta property="og:description" content="标题 上周遇到一个问题，在新公司新建android studio项目的时候，我新建一个带Navigation Drawer的Activity，然后findviewbyid拿nav_header_main.xml(这个布局文件是包含在main.xml里的)里面的Textview不能拿到，报了空指针，后来换个写法 View header=getLayoutInflater().from(this).i">
+<meta property="og:updated_time" content="2016-03-12T15:33:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="去除app广告">
-<meta name="twitter:description" content="首先说几种去广告的方法
-1.    反编译apk软件，直接修改显示广告的部分，然后保存重新编译下2.    Java hook，就如金山毒霸，lbe安全大师之类的，我也在csdn的博客上看过大牛分析3.    修改host文件，更改广告域名指向的指向，指向为本地">
+<meta name="twitter:title" content="com.android.support:design:23.2.0的一个bug">
+<meta name="twitter:description" content="标题 上周遇到一个问题，在新公司新建android studio项目的时候，我新建一个带Navigation Drawer的Activity，然后findviewbyid拿nav_header_main.xml(这个布局文件是包含在main.xml里的)里面的Textview不能拿到，报了空指针，后来换个写法 View header=getLayoutInflater().from(this).i">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -60,7 +54,7 @@
   };
 </script>
 
-  <title> 去除app广告 | lixinyang </title>
+  <title> com.android.support:design:23.2.0的一个bug | lixinyang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -159,7 +153,7 @@
           
           
             
-              去除app广告
+              com.android.support:design:23.2.0的一个bug
             
           
         </h1>
@@ -168,8 +162,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2014-06-30T19:18:03+08:00" content="Jun 30 2014">
-            Jun 30 2014
+          <time itemprop="dateCreated" datetime="2016-03-12T22:53:18+08:00" content="Mar 12 2016">
+            Mar 12 2016
           </time>
         </span>
 
@@ -179,8 +173,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/06/30/去除app广告/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/06/30/去除app广告/" itemprop="commentsCount"></span>
+            <a href="/2016/03/12/com-android-support-design-23-2-0的一个bug/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/12/com-android-support-design-23-2-0的一个bug/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -194,40 +188,28 @@
       
 
       
-        <span itemprop="articleBody"><p>首先说几种去广告的方法</p>
-<h3 id="1-_反编译apk软件，直接修改显示广告的部分，然后保存重新编译下">1.    反编译apk软件，直接修改显示广告的部分，然后保存重新编译下</h3><h3 id="2-_Java_hook，就如金山毒霸，lbe安全大师之类的，我也在csdn的博客上看过大牛分析">2.    Java hook，就如金山毒霸，lbe安全大师之类的，我也在csdn的博客上看过大牛分析</h3><h3 id="3-_修改host文件，更改广告域名指向的指向，指向为本地">3.    修改host文件，更改广告域名指向的指向，指向为本地</h3><a id="more"></a>
-<p>先来张软件截图，软件名称是功夫勇士，无意中看到同学在玩，还有个李小龙的头像，就去豌豆荚上下载了个，很旧的游戏但操作感不错，好像是从ios上移植过来的，放张开始界面，左下角明显的广告，<br><img src="http://www.eoeandroid.com/data/attachment/album/201405/14/164630rylgmzewor4eez25.png" alt="image"><br>有点熟悉，好像是谷歌提供之类的，顺便说几个逆向工具，apktool，dextojar，JD-JUI，IDA Pro如果还不了解自行脑补吧</p>
-<p>载入Apktool之后查看清单文件果然有一条配置Activity的语句</p>
-<p>[代码]java代码： <activity android:configchanges="”keyboard|keyboardHidden|orientation”" android:name="”com.google.ads.AdActivity”/"></activity></p>
-<p>尝试把这条语句去掉之后广告就没有了如图<br><img src="http://www.eoeandroid.com/data/attachment/album/201405/14/164648ocoyyck9jj1e9ofo.png" alt="image"><br>如果这样就结束了，托马斯和群里的他们肯定会鄙视我的，所以我继续用dextojar把dex文件转成jar文件再弄到JD-JUI中看看源码，明显看得出<br><img src="http://www.eoeandroid.com/data/attachment/album/201405/14/164935lu4s744ui4i5t1p3.png" alt="image"><br>谷歌广告接口的细节</p>
-<p>java代码：当然还是主要来看launchAdActivity这个类吧，内容太多放点关键吧<br>java代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static void launchAdActivity(d paramd, e parame) &#123; Activity localActivity; synchronized (a) &#123; if (c == null) c = paramd; while (c == paramd) &#123; localActivity = paramd.e(); if (localActivity != null) break; com.google.ads.util.a.e(&#34;activity was null while launching an AdActivity.&#34;); return; &#125; com.google.ads.util.a.b(&#34;Tried to launch a new AdActivity with a different AdManager.&#34;); return; &#125; Intent localIntent = new Intent(localActivity.getApplicationContext(), AdActivity.class); localIntent.putExtra(&#34;com.google.ads.AdOpener&#34;, parame.a()); try &#123; com.google.ads.util.a.a(&#34;Launching AdActivity.&#34;); localActivity.startActivity(localIntent); return; &#125; catch (ActivityNotFoundException localActivityNotFoundException) &#123; com.google.ads.util.a.a(localActivityNotFoundException.getMessage(), localActivityNotFoundException); &#125; &#125; public g getOpeningAdWebView() &#123; if (this.i != null) return this.i.f; synchronized (a) &#123; if (c == null) &#123; com.google.ads.util.a.e(&#34;currentAdManager was null while trying to get the opening AdWebView.&#34;); return null; &#125; g localg = c.i(); if (localg != this.f) return localg; return null; &#125; &#125; public VideoView getVideoView() &#123; return this.k; &#125; public void onClick(View paramView) &#123; finish(); &#125; public void onCompletion(MediaPlayer paramMediaPlayer) &#123; com.google.ads.util.a.d(&#34;Video finished playing.&#34;); if (this.k != null) this.k.setVisibility(8); this.f.loadUrl(&#34;javascript:AFMA_ReceiveMessage(&#39;onVideoEvent&#39;, &#123;&#39;event&#39;: &#39;finish&#39;&#125;);&#34;); &#125; public void onCreate(Bundle paramBundle) &#123; super.onCreate(paramBundle); d locald; Bundle localBundle; synchronized (a) &#123; if (c != null) &#123; locald = c; if (d == null) d = this; if ((this.i == null) &#38;amp;&#38;amp; (e != null)) this.i = e; e = this; this.h = null; this.j = false; this.k = null; localBundle = getIntent().getBundleExtra(&#34;com.google.ads.AdOpener&#34;); if (localBundle == null) a(&#34;Could not get the Bundle used to create AdActivity.&#34;); &#125; else &#123; a(&#34;Could not get currentAdManager.&#34;); return; &#125; &#125; e locale = new e(localBundle); String str1 = locale.b(); HashMap localHashMap = locale.c(); if (this == d) locald.s(); if (str1.equals(&#34;intent&#34;)) &#123; this.f = null; this.g = SystemClock.elapsedRealtime(); this.j = true; if (localHashMap == null) &#123; a(&#34;Could not get the paramMap in launchIntent()&#34;); return; &#125; String str6 = (String)localHashMap.get(&#34;u&#34;); if (str6 == null) &#123; a(&#34;Could not get the URL parameter in launchIntent().&#34;); return; &#125; String str7 = (String)localHashMap.get(&#34;i&#34;); String str8 = (String)localHashMap.get(&#34;m&#34;); Uri localUri = Uri.parse(str6); Object localObject3; if (str7 == null) localObject3 = new Intent(&#34;android.intent.action.VIEW&#34;, localUri); synchronized (a) &#123; while (true) &#123; if (b == null) &#123; b = this; if (c == null) break; c.t(); &#125; try &#123; com.google.ads.util.a.a(&#34;Launching an intent from AdActivity.&#34;); startActivity((Intent)localObject3); return; &#125; catch (ActivityNotFoundException localActivityNotFoundException) &#123; com.google.ads.util.a.a(localActivityNotFoundException.getMessage(), localActivityNotFoundException); finish(); return; &#125; Intent localIntent = new Intent(str7); if (str8 != null) &#123; localIntent.setDataAndType(localUri, str8); localObject3 = localIntent; &#125; else &#123; localIntent.setData(localUri); localObject3 = localIntent; &#125; &#125; com.google.ads.util.a.e(&#34;currentAdManager is null while trying to call onLeaveApplication().&#34;); &#125;&#60;/div&#62;&#10;&#60;p style=&#34;color: #666666;&#34;&#62;&#60;/p&#62;&#10;&#60;p style=&#34;color: #666666;&#34;&#62;&#60;span style=&#34;color: #666666;&#34;&#62;&#60;span style=&#34;color: #666666; font-size: medium;&#34;&#62;</span><br></pre></td></tr></table></figure></p>
-<p>广告的显示主要是一个webview，然后谷歌还用了一些工具类，包括还有定位，定位肯定是为了优化广告了，根据位置推送广告吧，</p>
-<p>然后我还在这个AdSize类里发现了广告条大小的定义</p>
-<p>java代码：<br><code>public class AdSize { public static final AdSize BANNER = new AdSize(320, 50, “320x50_mb”); public static final AdSize IAB_BANNER = new AdSize(468, 60, “468x60_as”); public static final AdSize IAB_LEADERBOARD = new AdSize(728, 90, “728x90_as”); public static final AdSize IAB_MRECT = new AdSize(300, 250, “300x250_as”); private int a; private int b; private String c; public AdSize(int paramInt1, int paramInt2) { this(paramInt1, paramInt2, null); } private AdSize(int paramInt1, int paramInt2, String paramString) { this.a = paramInt1; this.b = paramInt2; this.c = paramString; } public int getHeight() { return this.b; } public int getWidth() { return this.a; }</code><br>真正的广告类的定义也在这个包下，类名是AdView，篇幅有限，水平也有限，分析不当的请恳切指出，大牛笑笑就过来不要拍砖我</p>
+        <span itemprop="articleBody"><h3 id="标题">标题</h3><p> 上周遇到一个问题，在新公司新建android studio项目的时候，我新建一个带Navigation Drawer的Activity，然后findviewbyid拿nav_header_main.xml(这个布局文件是包含在main.xml里的)里面的Textview不能拿到，报了空指针，后来换个写法<br> <code>View header=getLayoutInflater().from(this).inflate(R.layout.nav_header_main,null);
+        TextView tv=(TextView) header.findViewById(R.id.textView);</code><br>        错误是没有了，就是TextView设置内容没有作用23333<br>后来看了以前写的一个项目直接findviewbyid是有用的，看了下以前android support design的版本和最新的不同，以前是23.0.1，发生错误的是23.2.0，后来修改了下<br>`//    compile ‘com.android.support:design:23.2.0’</p>
+<pre><code><span class="keyword">compile</span> <span class="string">'com.android.support:design:23.0.1'</span>`
+</code></pre><p>接着改了下NavigationView然后就能用了，Google药丸啊23333</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/android/" rel="tag">#android</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/07/05/Material-Design-中文版-转/" rel="prev">Material Design 中文版<转></a>
+              <a href="/2016/03/12/设置actionbar返回上一个activity/" rel="prev">设置actionbar返回上一个activity</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/06/30/Android深入浅出课程思维导图和Android-知识体系导图/" rel="next">Android深入浅出课程思维导图和Android_知识体系导图</a>
+              <a href="/2016/01/03/vn001项目总结/" rel="next">vn001项目总结</a>
             
           </div>
         </div>
@@ -353,7 +335,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-_反编译apk软件，直接修改显示广告的部分，然后保存重新编译下"><span class="nav-number">1.</span> <span class="nav-text">1.    反编译apk软件，直接修改显示广告的部分，然后保存重新编译下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-_Java_hook，就如金山毒霸，lbe安全大师之类的，我也在csdn的博客上看过大牛分析"><span class="nav-number">2.</span> <span class="nav-text">2.    Java hook，就如金山毒霸，lbe安全大师之类的，我也在csdn的博客上看过大牛分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-_修改host文件，更改广告域名指向的指向，指向为本地"><span class="nav-number">3.</span> <span class="nav-text">3.    修改host文件，更改广告域名指向的指向，指向为本地</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标题"><span class="nav-number">1.</span> <span class="nav-text">标题</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -407,9 +389,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'lixinyang';
-      var disqus_identifier = '2014/06/30/去除app广告/';
-      var disqus_title = '去除app广告';
-      var disqus_url = 'http://lixinyang.org/2014/06/30/去除app广告/';
+      var disqus_identifier = '2016/03/12/com-android-support-design-23-2-0的一个bug/';
+      var disqus_title = 'com.android.support:design:23.2.0的一个bug';
+      var disqus_url = 'http://lixinyang.org/2016/03/12/com-android-support-design-23-2-0的一个bug/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

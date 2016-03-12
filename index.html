@@ -241,6 +241,78 @@
           
           
             
+              <a class="post-title-link" href="/2016/03/12/com-android-support-design-23-2-0的一个bug/" itemprop="url">
+                com.android.support:design:23.2.0的一个bug
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-03-12T22:53:18+08:00" content="Mar 12 2016">
+            Mar 12 2016
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/12/com-android-support-design-23-2-0的一个bug/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/12/com-android-support-design-23-2-0的一个bug/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h3 id="标题">标题</h3><p> 上周遇到一个问题，在新公司新建android studio项目的时候，我新建一个带Navigation Drawer的Activity，然后findviewbyid拿nav_header_main.xml(这个布局文件是包含在main.xml里的)里面的Textview不能拿到，报了空指针，后来换个写法<br> <code>View header=getLayoutInflater().from(this).inflate(R.layout.nav_header_main,null);
+        TextView tv=(TextView) header.findViewById(R.id.textView);</code><br>        错误是没有了，就是TextView设置内容没有作用23333<br>后来看了以前写的一个项目直接findviewbyid是有用的，看了下以前android support design的版本和最新的不同，以前是23.0.1，发生错误的是23.2.0，后来修改了下<br>`//    compile ‘com.android.support:design:23.2.0’</p>
+<pre><code><span class="keyword">compile</span> <span class="string">'com.android.support:design:23.0.1'</span>`
+</code></pre><p>接着改了下NavigationView然后就能用了，Google药丸啊23333</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2016/01/03/vn001项目总结/" itemprop="url">
                 vn001项目总结
               </a>
@@ -449,79 +521,6 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/22/eventbus的使用与学习/" itemprop="url">
-                eventbus的使用与学习
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-22T18:22:06+08:00" content="Sep 22 2015">
-            Sep 22 2015
-          </time>
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/09/22/eventbus的使用与学习/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/22/eventbus的使用与学习/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h3 id="首先贴个地址">首先贴个地址</h3><h3 id="https://github-com/greenrobot/EventBus"><a href="https://github.com/greenrobot/EventBus">https://github.com/greenrobot/EventBus</a></h3><p> <code>Android EventBus</code>是基于事件驱动的一个开源库，也算是一个观察者模式Observe，扩展性强使用简单，用发布者和订阅者很好的解决了两个模块之间的通信，如Fragment和Activity，Activity和Service之间的通信啊，支持自定义消息类型来传输，最近公司的一个项目控制音乐的播放，我也用到了EventBus，由Activity向Service发送消息，Service来控制音乐曲目的播放，代码片段<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/22/eventbus的使用与学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -560,7 +559,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
