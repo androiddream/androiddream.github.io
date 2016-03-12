@@ -154,6 +154,93 @@
           
           
             
+              <a class="post-title-link" href="/2016/03/12/设置actionbar返回上一个activity/" itemprop="url">
+                设置actionbar返回上一个activity
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2016-03-12T23:18:04+08:00" content="Mar 12 2016">
+            Mar 12 2016
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/12/设置actionbar返回上一个activity/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/12/设置actionbar返回上一个activity/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333</p>
+<ol>
+<li>让你的activity继承ActionBarActivity</li>
+<li>getSupportActionBar().setDisplayHomeAsUpEnabled(true);</li>
+<li><p>在manifest添加一些配置` &lt;activity</p>
+<pre><code>    android:name=".LoginActivity"
+    android:label="@string/title_activity_login"
+    android:parentActivityName=".MainActivity"
+    android:theme="@style/AppTheme" &gt;
+
+    <span class="comment">&lt;!-- Parent activity meta-data to support 4.0 and lower --&gt;</span>
+    <span class="tag">&lt;<span class="title">meta-data</span>
+        <span class="attribute">android:name</span>=<span class="value">"android.support.PARENT_ACTIVITY"</span>
+        <span class="attribute">android:value</span>=<span class="value">"com.lee.xinyang.myapplication.MainActivity"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">activity</span>&gt;</span>`
+</code></pre></li>
+</ol>
+<pre><code>![<span class="link_label">image</span>](<span class="link_url">http://7vzq44.com1.z0.glb.clouddn.com/android233.gif</span>)    
+</code></pre><p> ok,懒人睡觉😪了，话说昨天那妹子好萌呀我去，讲道理怎么那么萌呢我要变痴汉了，救命</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2016/01/03/vn001项目总结/" itemprop="url">
                 vn001项目总结
               </a>
@@ -435,79 +522,6 @@
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/22/android滑动banner的实现/" itemprop="url">
-                android滑动banner的实现
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-22T18:21:16+08:00" content="Sep 22 2015">
-            Sep 22 2015
-          </time>
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/09/22/android滑动banner的实现/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/22/android滑动banner的实现/" itemprop="commentsCount"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>手写代码实现android滑动banner的实现<br><img src="http://7vzq44.com1.z0.glb.clouddn.com/android.gif" alt="image"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/09/22/android滑动banner的实现/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -546,7 +560,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -35,17 +35,28 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="peter writed this paper for me and jesus,">
+<meta name="description" content="现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333
+
+让你的activity继承ActionBarActivity
+getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+在manifest添加一些配置` &amp;lt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="peter">
-<meta property="og:url" content="http://lixinyang.org/2015/08/15/peter/index.html">
+<meta property="og:title" content="设置actionbar返回上一个activity">
+<meta property="og:url" content="http://lixinyang.org/2016/03/12/设置actionbar返回上一个activity/index.html">
 <meta property="og:site_name" content="lixinyang">
-<meta property="og:description" content="peter writed this paper for me and jesus,">
-<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Gospel%20of%20ring.PNG">
-<meta property="og:updated_time" content="2015-08-20T15:07:43.000Z">
+<meta property="og:description" content="现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333
+
+让你的activity继承ActionBarActivity
+getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+在manifest添加一些配置` &amp;lt;">
+<meta property="og:updated_time" content="2016-03-12T15:29:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="peter">
-<meta name="twitter:description" content="peter writed this paper for me and jesus,">
+<meta name="twitter:title" content="设置actionbar返回上一个activity">
+<meta name="twitter:description" content="现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333
+
+让你的activity继承ActionBarActivity
+getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+在manifest添加一些配置` &amp;lt;">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -55,7 +66,7 @@
   };
 </script>
 
-  <title> peter | lixinyang </title>
+  <title> 设置actionbar返回上一个activity | lixinyang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,7 +165,7 @@
           
           
             
-              peter
+              设置actionbar返回上一个activity
             
           
         </h1>
@@ -163,8 +174,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-08-15T22:59:11+08:00" content="Aug 15 2015">
-            Aug 15 2015
+          <time itemprop="dateCreated" datetime="2016-03-12T23:18:04+08:00" content="Mar 12 2016">
+            Mar 12 2016
           </time>
         </span>
 
@@ -174,8 +185,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/08/15/peter/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/15/peter/" itemprop="commentsCount"></span>
+            <a href="/2016/03/12/设置actionbar返回上一个activity/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/12/设置actionbar返回上一个activity/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -189,8 +200,25 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="peter_writed_this_paper_for_me_and_jesus,">peter writed this paper for me and jesus,</h2><a id="more"></a>
-<p><img src="http://7vzq44.com1.z0.glb.clouddn.com/Gospel%20of%20ring.PNG" alt="image"></p>
+        <span itemprop="articleBody"><p>现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333</p>
+<ol>
+<li>让你的activity继承ActionBarActivity</li>
+<li>getSupportActionBar().setDisplayHomeAsUpEnabled(true);</li>
+<li><p>在manifest添加一些配置` &lt;activity</p>
+<pre><code>    android:name=".LoginActivity"
+    android:label="@string/title_activity_login"
+    android:parentActivityName=".MainActivity"
+    android:theme="@style/AppTheme" &gt;
+
+    <span class="comment">&lt;!-- Parent activity meta-data to support 4.0 and lower --&gt;</span>
+    <span class="tag">&lt;<span class="title">meta-data</span>
+        <span class="attribute">android:name</span>=<span class="value">"android.support.PARENT_ACTIVITY"</span>
+        <span class="attribute">android:value</span>=<span class="value">"com.lee.xinyang.myapplication.MainActivity"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">activity</span>&gt;</span>`
+</code></pre></li>
+</ol>
+<pre><code>![<span class="link_label">image</span>](<span class="link_url">http://7vzq44.com1.z0.glb.clouddn.com/android233.gif</span>)    
+</code></pre><p> ok,懒人睡觉😪了，话说昨天那妹子好萌呀我去，讲道理怎么那么萌呢我要变痴汉了，救命</p>
 </span>
       
     </div>
@@ -202,13 +230,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/08/20/经管工作记录/" rel="prev">经管工作记录</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/04/20/android解析dataset/" rel="next">android解析dataset</a>
+              <a href="/2016/01/03/vn001项目总结/" rel="next">vn001项目总结</a>
             
           </div>
         </div>
@@ -334,7 +360,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#peter_writed_this_paper_for_me_and_jesus,"><span class="nav-number">1.</span> <span class="nav-text">peter writed this paper for me and jesus,</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -388,9 +414,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'lixinyang';
-      var disqus_identifier = '2015/08/15/peter/';
-      var disqus_title = 'peter';
-      var disqus_url = 'http://lixinyang.org/2015/08/15/peter/';
+      var disqus_identifier = '2016/03/12/设置actionbar返回上一个activity/';
+      var disqus_title = '设置actionbar返回上一个activity';
+      var disqus_url = 'http://lixinyang.org/2016/03/12/设置actionbar返回上一个activity/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
