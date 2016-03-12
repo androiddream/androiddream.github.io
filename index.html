@@ -192,26 +192,12 @@
 
       
         
-          <span itemprop="articleBody"><p>现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333</p>
-<ol>
-<li>让你的activity继承ActionBarActivity</li>
-<li>getSupportActionBar().setDisplayHomeAsUpEnabled(true);</li>
-<li><p>在manifest添加一些配置` &lt;activity</p>
-<pre><code>    android:name=".LoginActivity"
-    android:label="@string/title_activity_login"
-    android:parentActivityName=".MainActivity"
-    android:theme="@style/AppTheme" &gt;
-
-    <span class="comment">&lt;!-- Parent activity meta-data to support 4.0 and lower --&gt;</span>
-    <span class="tag">&lt;<span class="title">meta-data</span>
-        <span class="attribute">android:name</span>=<span class="value">"android.support.PARENT_ACTIVITY"</span>
-        <span class="attribute">android:value</span>=<span class="value">"com.lee.xinyang.myapplication.MainActivity"</span> /&gt;</span>
-<span class="tag">&lt;/<span class="title">activity</span>&gt;</span>`
-</code></pre></li>
-</ol>
-<pre><code>![<span class="link_label">image</span>](<span class="link_url">http://7vzq44.com1.z0.glb.clouddn.com/android233.gif</span>)    
-</code></pre><p> ok,懒人睡觉😪了，话说昨天那妹子好萌呀我去，讲道理怎么那么萌呢我要变痴汉了，救命</p>
-</span>
+          <p>现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/12/设置actionbar返回上一个activity/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -279,11 +265,12 @@
 
       
         
-          <span itemprop="articleBody"><h3 id="标题">标题</h3><p> 上周遇到一个问题，在新公司新建android studio项目的时候，我新建一个带Navigation Drawer的Activity，然后findviewbyid拿nav_header_main.xml(这个布局文件是包含在main.xml里的)里面的Textview不能拿到，报了空指针，后来换个写法<br> <code>View header=getLayoutInflater().from(this).inflate(R.layout.nav_header_main,null);
-        TextView tv=(TextView) header.findViewById(R.id.textView);</code><br>        错误是没有了，就是TextView设置内容没有作用23333<br>后来看了以前写的一个项目直接findviewbyid是有用的，看了下以前android support design的版本和最新的不同，以前是23.0.1，发生错误的是23.2.0，后来修改了下<br>`//    compile ‘com.android.support:design:23.2.0’</p>
-<pre><code><span class="keyword">compile</span> <span class="string">'com.android.support:design:23.0.1'</span>`
-</code></pre><p>接着改了下NavigationView然后就能用了，Google药丸啊23333</p>
-</span>
+          <h3 id="标题">标题</h3>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/12/com-android-support-design-23-2-0的一个bug/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
