@@ -42,7 +42,7 @@
 <meta property="og:site_name" content="lixinyang">
 <meta property="og:description" content="现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333">
 <meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/android233.gif">
-<meta property="og:updated_time" content="2016-03-12T15:45:23.000Z">
+<meta property="og:updated_time" content="2016-03-12T15:58:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设置actionbar返回上一个activity">
 <meta name="twitter:description" content="现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333">
@@ -193,8 +193,7 @@
 <ol>
 <li>让你的activity继承ActionBarActivity</li>
 <li>getSupportActionBar().setDisplayHomeAsUpEnabled(true);</li>
-<li>在manifest添加一些配置</li>
-<li>`&lt;activity<pre><code>    android:name=".LoginActivity"
+<li>在manifest添加一些配置<br>`&lt;activity<pre><code>    android:name=".LoginActivity"
     android:label="@string/title_activity_login"
     android:parentActivityName=".MainActivity"
     android:theme="@style/AppTheme" &gt;
