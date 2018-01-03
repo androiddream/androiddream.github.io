@@ -35,23 +35,19 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="title: 设置actionbar返回上一个activity
-date: 2016-03-12 23:18:04
-tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333">
+<meta name="description" content="charles抓包获取api">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lixinyang">
-<meta property="og:url" content="http://lixinyang.org/2017/05/03/设置actionbar返回上一个activity/index.html">
+<meta property="og:title" content="抓包云南日报app自己做一个">
+<meta property="og:url" content="http://lixinyang.org/2018/01/03/抓包云南日报app自己做一个/index.html">
 <meta property="og:site_name" content="lixinyang">
-<meta property="og:description" content="title: 设置actionbar返回上一个activity
-date: 2016-03-12 23:18:04
-tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333">
-<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/android233.gif">
-<meta property="og:updated_time" content="2017-05-03T13:37:13.000Z">
+<meta property="og:description" content="charles抓包获取api">
+<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2018-01-01-00-58-44.png">
+<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2018-01-01-00-55-24.png">
+<meta property="og:image" content="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2018-01-01-00-56-53.png">
+<meta property="og:updated_time" content="2018-01-03T14:28:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lixinyang">
-<meta name="twitter:description" content="title: 设置actionbar返回上一个activity
-date: 2016-03-12 23:18:04
-tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333">
+<meta name="twitter:title" content="抓包云南日报app自己做一个">
+<meta name="twitter:description" content="charles抓包获取api">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -61,7 +57,7 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
   };
 </script>
 
-  <title>  | lixinyang </title>
+  <title> 抓包云南日报app自己做一个 | lixinyang </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -160,7 +156,7 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
           
           
             
-              
+              抓包云南日报app自己做一个
             
           
         </h1>
@@ -169,8 +165,8 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2017-05-03T21:37:13+08:00" content="May 3 2017">
-            May 3 2017
+          <time itemprop="dateCreated" datetime="2018-01-03T22:27:40+08:00" content="Jan 3 2018">
+            Jan 3 2018
           </time>
         </span>
 
@@ -180,8 +176,8 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2017/05/03/设置actionbar返回上一个activity/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/03/设置actionbar返回上一个activity/" itemprop="commentsCount"></span>
+            <a href="/2018/01/03/抓包云南日报app自己做一个/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/03/抓包云南日报app自己做一个/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -195,21 +191,198 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
       
 
       
-        <span itemprop="articleBody"><p>title: 设置actionbar返回上一个activity</p>
-<p>date: 2016-03-12 23:18:04</p>
-<h2 id="tags:">tags:</h2><p>现在还在actionbar有点老土了，都是toolbar那里塞上一个图标返回上一个activity，或者一个自定义ViewGroup，人懒，觉得原始的原生的挺好看，就这样搞了2333</p>
-<a id="more"></a>
-<ol>
-<li><p>让你的activity继承ActionBarActivity</p>
-</li>
-<li><p>getSupportActionBar().setDisplayHomeAsUpEnabled(true);</p>
-</li>
-<li><p>在manifest添加一些配置</p>
-<p>`&lt;activity</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    android:name=&#34;.LoginActivity&#34;&#10;    android:label=&#34;@string/title_activity_login&#34;&#10;    android:parentActivityName=&#34;.MainActivity&#34;&#10;    android:theme=&#34;@style/AppTheme&#34; &#62;&#10;    &#60;!-- Parent activity meta-data to support 4.0 and lower --&#62;&#10;    &#60;meta-data&#10;        android:name=&#34;android.support.PARENT_ACTIVITY&#34;&#10;        android:value=&#34;com.lee.xinyang.myapplication.MainActivity&#34; /&#62;&#10;&#60;/activity&#62;`</span><br></pre></td></tr></table></figure>
-<p><img src="http://7vzq44.com1.z0.glb.clouddn.com/android233.gif" alt="image">    </p>
-</li>
-</ol>
+        <span itemprop="articleBody"><h3 id="charles抓包获取api">charles抓包获取api</h3><a id="more"></a>
+<p>初始化</p>
+<p> <a href="http://cms.wxyd.yunnan.cn/index.php?m=initialization" target="_blank" rel="external">http://cms.wxyd.yunnan.cn/index.php?m=initialization</a></p>
+<p>获取栏目（post）</p>
+<p><a href="http://cms.wxyd.yunnan.cn/index.php?m=news&amp;a=get_category" target="_blank" rel="external">http://cms.wxyd.yunnan.cn/index.php?m=news&amp;a=get_category</a></p>
+<p>headers:</p>
+<p>content-type: application/x-www-form-urlencoded</p>
+<p>body:</p>
+<p>mod=bobao&amp;app_name=wxyd&amp;</p>
+<p><code>response:</code></p>
+<p><code>{</code></p>
+<p>  <code>&quot;status&quot;: 1,</code></p>
+<p>  <code>&quot;msg&quot;: &quot;栏目获取成功&quot;,</code></p>
+<p>  <code>&quot;categories&quot;: [</code></p>
+<pre><code>`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"93"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"头条"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"93"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">true</span></span>`
+
+`<span class="javascript">},</span>`
+
+`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"116"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"要闻"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"116"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">true</span></span>`
+
+`<span class="javascript">},</span>`
+
+`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"7"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"深读"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"258"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">true</span></span>`
+
+`<span class="javascript">},</span>`
+
+`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"96"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"新谈"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"259"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">true</span></span>`
+
+`<span class="javascript">},</span>`
+
+`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"102"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"周边"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"260"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">true</span></span>`
+
+`<span class="javascript">},</span>`
+
+`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"117"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"视界"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"261"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">false</span></span>`
+
+`<span class="javascript">},</span>`
+
+`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"98"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"家园"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"262"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">true</span></span>`
+
+`<span class="javascript">},</span>`
+
+`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"97"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"民族"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"263"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">false</span></span>`
+
+`<span class="javascript">},</span>`
+
+`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"103"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"旅游"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"264"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">false</span></span>`
+
+`<span class="javascript">},</span>`
+
+`<span class="javascript">{</span>`
+
+  `<span class="javascript"><span class="string">"id"</span>: <span class="string">"99"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"name"</span>: <span class="string">"花潮"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"listorder"</span>: <span class="string">"265"</span>,</span>`
+
+  `<span class="javascript"><span class="string">"subscribe_flag"</span>: <span class="literal">false</span></span>`
+
+`<span class="javascript">}</span>`
+</code></pre><p>  <code>]</code></p>
+<p><code>}</code></p>
+<p>toplist</p>
+<p><a href="http://cms.wxyd.yunnan.cn/index.php?m=news&amp;a=get_top_list" target="_blank" rel="external">http://cms.wxyd.yunnan.cn/index.php?m=news&amp;a=get_top_list</a></p>
+<p>body</p>
+<p>category_id=93&amp;app_name=wxyd&amp;</p>
+<p><code>response</code><br><code>{</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#9;`&#34;id&#34;: &#34;43766&#34;,`&#10;&#9;`&#34;top&#34;: &#34;1&#34;,`&#10;&#9;`&#34;title&#34;: &#34;2017\u4e91\u5357\u7701\u4eba\u793e\u7cfb\u7edf\u670d\u52a1\u519c\u6c11\u5de5\u7535\u5b50\u624b\u518c&#34;,`&#10;`&#34;time&#34;: &#34;2017-03-23 19:34:52&#34;,`&#10;`&#34;timestamp&#34;: &#34;1490268892&#34;,`&#10;`&#34;thumbnail&#34;: &#34;http:\/\/wxyd.yunnan.cn\/uploadfile\/s2\/2017\/0324\/20170324022334919.jpg&#34;,`&#10;    `&#34;summary&#34;: &#34;&#34;,`&#10;&#9;`&#34;source&#34;: null,`&#10;&#9;`&#34;comment_id&#34;: &#34;wxyd-93-43766&#34;,`&#10;&#9;`&#34;comments_count&#34;: &#34;0&#34;,`&#10;&#9;`&#34;detail_url&#34;: &#34;http:\/\/h5.wxyd.yunnan.cn\/2017\/nmgsc\/index.html&#34;,`&#10;&#9;`&#34;listorder&#34;: &#34;44002.0100000&#34;,`&#10;&#9;`&#34;special_id&#34;: &#34;&#34;,`&#10;&#9;`&#34;tag&#34;: &#34;0&#34;`&#10;`&#125;`</span><br></pre></td></tr></table></figure>
+<p>getlist</p>
+<p><a href="http://cms.wxyd.yunnan.cn/index.php?m=news&amp;a=get_list" target="_blank" rel="external">http://cms.wxyd.yunnan.cn/index.php?m=news&amp;a=get_list</a></p>
+<p>body</p>
+<p>since_id=0&amp;category_id=116&amp;app_name=wxyd&amp;count=20&amp;</p>
+<p>more</p>
+<p>category_id=116&amp;app_name=wxyd&amp;count=20&amp;max_id=43984.0&amp;</p>
+<p>register</p>
+<p><a href="http://wxyd.yunnan.cn/yydapi.jsp?m=account&amp;a=register" target="_blank" rel="external">http://wxyd.yunnan.cn/yydapi.jsp?m=account&amp;a=register</a></p>
+<p>body</p>
+<table>
+<thead>
+<tr>
+<th>safe_question</th>
+<th>{“你最喜欢的颜色”:”yellow”,”你的家乡在哪”:”大理”}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>email</td>
+<td>245010735@qq.com</td>
+</tr>
+<tr>
+<td>password</td>
+<td>98641e30ace18a76f07bd7e5fbf7cd6c</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>lee</td>
+</tr>
+</tbody>
+</table>
+<p><code>{</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`&#34;status&#34;: 1,`&#10;`&#34;msg&#34;: &#34;\u6ce8\u518c\u6210\u529f&#34;`</span><br></pre></td></tr></table></figure>
+<p><code>}</code><br><code>{</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`&#34;status&#34;: 1,`&#10;`&#34;token&#34;: &#34;3436ee2ca8428a142949e086d1cc495a&#34;,`&#10;`&#34;readerid&#34;: 129781,`&#10;`&#34;msg&#34;: &#34;\u767b\u9646\u6210\u529f&#34;`</span><br></pre></td></tr></table></figure>
+<p><code>}</code></p>
+<p>userinfo</p>
+<p><a href="http://wxyd.yunnan.cn/yydapi.jsp?m=account&amp;a=authenticate" target="_blank" rel="external">http://wxyd.yunnan.cn/yydapi.jsp?m=account&amp;a=authenticate</a></p>
+<p>body</p>
+<p>token=3436ee2ca8428a142949e086d1cc495a&amp;device_id=215b8758-952e-3380-84e2-90635a90ee95&amp;</p>
+<h3 id="Android_app部分">Android app部分</h3><p>retrofit+mvp+rxjava+rxcache</p>
+<p>viewpager+recycleview显示新闻列表界面</p>
+<p>webview显示新闻详情页面</p>
+<p>获取新闻列表</p>
+<p><code>@FormUrlEncoded@POST(&quot;?m=news&amp;a=get_list&quot;)Observable&lt;HttpResult&lt;List&lt;NewsListDto&gt;&gt;&gt; getNewsList(@FieldMap HashMap&lt;String,Object&gt; dto);</code></p>
+<p>用到的开源项目</p>
+<p>compile ‘com.github.bumptech.glide:glide:3.7.0’<br>compile project(path: ‘:lcrapiddeveloplibrary’)<br>compile ‘com.android.support:cardview-v7:23.4.0’<br>compile ‘com.android.support:recyclerview-v7:23.4.0’<br>compile ‘com.netflix.feign:feign-gson:8.17.0’<br>compile ‘io.reactivex:rxandroid:1.2.1’<br>compile ‘com.squareup.retrofit2:retrofit:2.0.0-beta4’<br>compile ‘com.squareup.retrofit2:converter-gson:2.0.0-beta4’<br>compile ‘com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4’<br>compile ‘com.github.VictorAlbertos.RxCache:core:1.4.6’<br>compile ‘com.zhy:okhttputils:2.6.2’<br>compile ‘com.youth.banner:banner:1.4.9’  //banner1最新版本</p>
+<p>运行效果如图和官方的对比</p>
+<p> <img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2018-01-01-00-58-44.png" alt="image"></p>
+<p><img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2018-01-01-00-55-24.png" alt="image"></p>
+<p><img src="http://7vzq44.com1.z0.glb.clouddn.com/Screenshot_2018-01-01-00-56-53.png" alt="image"></p>
 </span>
       
     </div>
@@ -221,13 +394,11 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/03/daily-algorithm/" rel="prev"></a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/12/com-android-support-design-23-2-0的一个bug/" rel="next">com.android.support:design:23.2.0的一个bug</a>
+              <a href="/2017/05/03/algorithm01/" rel="next">algorithm01</a>
             
           </div>
         </div>
@@ -293,7 +464,7 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -353,7 +524,7 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags:"><span class="nav-number">1.</span> <span class="nav-text">tags:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#charles抓包获取api"><span class="nav-number">1.</span> <span class="nav-text">charles抓包获取api</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android_app部分"><span class="nav-number">2.</span> <span class="nav-text">Android app部分</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -370,7 +541,7 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>
@@ -407,9 +578,9 @@ tags:现在还在actionbar有点老土了，都是toolbar那里塞上一个图�
 
     <script type="text/javascript">
       var disqus_shortname = 'lixinyang';
-      var disqus_identifier = '2017/05/03/设置actionbar返回上一个activity/';
-      var disqus_title = '';
-      var disqus_url = 'http://lixinyang.org/2017/05/03/设置actionbar返回上一个activity/';
+      var disqus_identifier = '2018/01/03/抓包云南日报app自己做一个/';
+      var disqus_title = '抓包云南日报app自己做一个';
+      var disqus_url = 'http://lixinyang.org/2018/01/03/抓包云南日报app自己做一个/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
